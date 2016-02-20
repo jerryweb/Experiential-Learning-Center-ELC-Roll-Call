@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ELCAppAndroid</string>
+    <string name="login_screen_title">Title</string>
+    <string name="email_hint_text">Email Address</string>
+    <string name="password_hint_text">Password</string>
+    <string name="login_label">Login</string>
+    <string name="register_label">Register</string>
+    <string name="forgot_password_label">Forgot your password?</string>
+</resources>

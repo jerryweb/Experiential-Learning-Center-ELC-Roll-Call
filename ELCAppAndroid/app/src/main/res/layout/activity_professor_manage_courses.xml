@@ -16,5 +16,13 @@
         android:id="@+id/createCoursebutton"
         android:layout_gravity="center_horizontal"
         android:background="@color/teal"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_marginBottom="4dp" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

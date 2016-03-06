@@ -25,11 +25,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/userSelectionRadioGroup">
+
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Student"
-            android:id="@+id/radioButton"
+            android:id="@+id/radioButtonStudent"
             android:layout_weight=".5"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium_size"
@@ -39,10 +45,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Instructor"
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButtonInstructor"
             android:layout_weight=".5"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium_size" />
+
+        </RadioGroup>
+
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +67,7 @@
             android:layout_height="fill_parent"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/firstNameEditText"
+            android:id="@+id/EditTextfirstName"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium_size"
@@ -71,7 +80,7 @@
             android:layout_height="fill_parent"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/lastNameEditText"
+            android:id="@+id/editTextLastName"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium_size"
@@ -84,7 +93,7 @@
             android:layout_height="fill_parent"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/emailEditText"
+            android:id="@+id/editTextEmail"
             android:layout_gravity="center_horizontal"
             android:hint="@string/email_hint_text"
             android:textColor="@color/white"
@@ -97,7 +106,7 @@
             android:layout_height="fill_parent"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/universityIDEditText"
+            android:id="@+id/editTextUniversityId"
             android:layout_gravity="center_horizontal"
             android:hint="University ID"
             android:textColor="@color/white"
@@ -110,7 +119,7 @@
             android:layout_height="fill_parent"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/passEditText"
+            android:id="@+id/editTextPassword"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:hint="@string/password_hint_text"
@@ -123,7 +132,7 @@
             android:layout_height="fill_parent"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/confirmPassEditText2"
+            android:id="@+id/editTextConfirmPass"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:hint="Confirm Password"
@@ -142,7 +151,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Create Account"
-                android:id="@+id/createAccountbutton"
+                android:id="@+id/buttonCreateAccount"
                 android:layout_weight=".5"
                 android:background="@color/teal"
                 android:textColor="@color/white"
@@ -152,7 +161,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Clear"
-                android:id="@+id/clearButton"
+                android:id="@+id/buttonClear"
                 android:layout_weight=".5"
                 android:background="@color/teal"
                 android:textColor="@color/white"

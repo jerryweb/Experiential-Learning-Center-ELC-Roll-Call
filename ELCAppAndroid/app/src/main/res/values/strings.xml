@@ -6,4 +6,6 @@
     <string name="login_label">Login</string>
     <string name="register_label">Register</string>
     <string name="forgot_password_label">Forgot your password?</string>
+    <string name="attendance">Attendance</string>
+    <string name="uploaded_files">Uploaded Files</string>
 </resources>

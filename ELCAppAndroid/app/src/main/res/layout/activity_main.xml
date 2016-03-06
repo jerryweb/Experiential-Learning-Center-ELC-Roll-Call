@@ -110,24 +110,24 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
-            android:id="@+id/radioGroup"
+            android:id="@+id/userSelectionRadioGroup"
             android:layout_weight=".45">
 
             <RadioButton
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Student"
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButtonStudent"
                 android:layout_weight=".5"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_medium_size"
-                android:checked="true" />
+                android:checked="false" />
 
             <RadioButton
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Instructor"
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtonInstructor"
                 android:layout_weight=".5"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_medium_size" />

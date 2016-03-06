@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import static webb.jerry.elcappandroid.R.*;
 
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextLastName = (EditText) findViewById(R.id.editTextLastName);
         editTextNewEmail = (EditText) findViewById(R.id.editTextNewEmail);
         editTextUniversityId = (EditText) findViewById(R.id.editTextUniversityId);
-        editTextNewPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextNewPassword = (EditText) findViewById(R.id.editTextNewPassword);
         editTextNewConfirmPass = (EditText) findViewById(R.id.editTextConfirmNewPass);
 
         buttonCreateAccount = (Button) findViewById(R.id.buttonCreateAccount);
@@ -72,15 +73,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonClear.setOnClickListener(this);
         buttonCreateAccount.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
+        userType = 0;
 
-//        userType = R.id.userSelectionRadioGroup;
+        userSelectionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                userType = checkedId;
+            }
+        });
 
-//        userSelectionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                userType = checkedId;
-//            }
-//        });
 
 
     }
@@ -90,10 +91,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()){
             case R.id.loginButton:
-                Log.d(TAG, "Register button Clicked");
-                Intent iStudent = new Intent(getApplicationContext(), ClassManagementActivity.class);
-                iStudent.putExtra(ClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
-                iStudent.putExtra(ClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+                Log.d(TAG, "Register login Clicked");
+//                if(textEmailAddress.getText()uals(" ")) {
+//                    Toast.makeText(getApplicationContext(),"Please enter a valid email address", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+                Intent intentLogin;
+                if(true) {
+                    intentLogin = new Intent(getApplicationContext(), ClassManagementActivity.class);
+                }
+                else {
+                    intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+
+                }
+                intentLogin.putExtra(ClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
+                intentLogin.putExtra(ClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+
+                startActivity(intentLogin);
+//                }
                 break;
 
             case R.id.registerButton:
@@ -116,9 +131,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonCreateAccount:
-                Intent iProfessor = new Intent(getApplicationContext(), ClassManagementActivity.class);
-                iProfessor.putExtra(ClassManagementActivity.EXTRA_EMAIL_ADDRESS, editTextNewEmail.getText());
-                iProfessor.putExtra(ClassManagementActivity.EXTRA_PASSWORD, editTextNewPassword.getText());
+                Intent intentRegister;
+                if(true) {
+                    intentRegister = new Intent(getApplicationContext(), ClassManagementActivity.class);
+                }
+                else {
+                    intentRegister = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+                }
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_EMAIL_ADDRESS, editTextNewEmail.getText());
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_PASSWORD, editTextNewPassword.getText());
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_CONFIRM_PASSWORD, editTextNewConfirmPass.getText());
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_FIRST_NAME, editTextfirstName.getText());
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_LAST_NAME, editTextLastName.getText());
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_UNIVERSITY_ID, editTextUniversityId.getText());
+                intentRegister.putExtra(ClassManagementActivity.EXTRA_USER_TYPE, userType);
+                startActivity(intentRegister);
                 break;
 
             case id.buttonBack:

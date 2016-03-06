@@ -14,6 +14,17 @@ import webb.jerry.elcappandroid.View.CourseAdapter;
  * Created by LJ on 3/5/16.
  */
 public class ClassManagementActivity extends AppCompatActivity {
+    public static final String EXTRA_USERNAME = "webb.jerry.elc.username";
+    public static final String EXTRA_PASSWORD = "webb.jerry.elc.password";
+    public static final String EXTRA_FIRST_NAME = "webb.jerry.elc.firstName";
+    public static final String EXTRA_LAST_NAME = "webb.jerry.elc.lastName";
+    public static final String EXTRA_EMAIL_ADDRESS = "webb.jerry.elc.email";
+    public static final String EXTRA_UNIVERSITY_ID = "webb.jerry.elc.universityId";
+    public static final String EXTRA_CONFIRM_PASSWORD = "webb.jerry.elc.confirmPassword";
+    public static final String EXTRA_USER_TYPE = "webb.jerry.elc.userType";
+
+
+
     ArrayList <Course> studentCourses;
     RadioGroup radioGroupContentSelection;
     ListView listViewStudntClassAttendance;

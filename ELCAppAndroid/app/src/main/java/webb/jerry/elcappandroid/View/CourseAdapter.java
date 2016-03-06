@@ -37,9 +37,13 @@ public class CourseAdapter extends ArrayAdapter<Course>  {
         TextView textViewInstructorName = (TextView) convertView.findViewById(R.id.textViewInstructorName);
         TextView textViewDate = (TextView) convertView.findViewById(R.id.textViewDate);
 
-//        if(instructorInterface == false){
-//            checkBoxStudentPresent.setVisibility();
-//        }
+        if(instructorInterface == false){
+            checkBoxStudentPresent.setVisibility(View.VISIBLE);
+        }
+        else{
+            checkBoxStudentPresent.setVisibility(View.INVISIBLE);
+        }
+
 
         textViewCourseName.setText(course.getClassName());
         textViewInstructorName.setText(course.getInstructorName());

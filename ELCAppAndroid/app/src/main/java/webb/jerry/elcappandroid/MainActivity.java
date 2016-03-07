@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import static webb.jerry.elcappandroid.R.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
+        Firebase.setAndroidContext(this);
 
         viewLogin = (View) findViewById(id.viewLogin);
         viewLogin.setVisibility(View.VISIBLE);

@@ -38,7 +38,7 @@ public class ClassManagementActivity extends AppCompatActivity {
         radioGroupContentSelection = (RadioGroup) findViewById(R.id.radioGroupContentSelection);
         listViewStudntClassAttendance = (ListView) findViewById(R.id.listViewStudntClassAttendance);
         courseAdapter = new CourseAdapter(this, studentCourses);
-        listViewStudntClassAttendance.setAdapter(courseAdapter);
+//        listViewStudntClassAttendance.setAdapter(courseAdapter);
 
     }
 

@@ -10,8 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import webb.jerry.elcappandroid.Constants;
+
 
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+import java.util.Map;
 
 import static webb.jerry.elcappandroid.R.*;
 
@@ -149,6 +154,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intentRegister.putExtra(ClassManagementActivity.EXTRA_UNIVERSITY_ID, editTextUniversityId.getText());
                 intentRegister.putExtra(ClassManagementActivity.EXTRA_USER_TYPE, userType);
                 startActivity(intentRegister);
+
+                Log.d(TAG, "I'm here");
+                Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
+                Log.d(TAG, getResources().getString(R.string.Firebase_url));
+                Log.d(TAG, "I'm here again");
+                ref.createUser(editTextNewEmail.getText().toString(),
+                        editTextNewPassword.getText().toString(),
+                        new Firebase.ValueResultHandler<Map<String, Object>>() {
+                            @Override
+                            public void onSuccess(Map<String, Object> stringObjectMap) {
+                                Log.d(TAG, "I'm here again");
+                                Toast.makeText(getApplicationContext(),
+                                        "User created!", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(FirebaseError firebaseError) {
+                                Toast.makeText(getApplicationContext(),
+                                        firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                 break;
 
             case id.buttonBack:

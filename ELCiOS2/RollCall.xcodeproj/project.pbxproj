@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15155CC21C9F661800B80C1C /* RollCallNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15155CC11C9F661800B80C1C /* RollCallNavigationController.m */; };
+		157B86A01C84FFB00012755C /* InstructorHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B869F1C84FFB00012755C /* InstructorHomePageViewController.m */; };
+		157B86A61C8500CE0012755C /* StudentHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B86A51C8500CE0012755C /* StudentHomePageViewController.m */; };
+		157B86A91C85017C0012755C /* StudentAttendanceHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B86A81C85017C0012755C /* StudentAttendanceHistoryViewController.m */; };
+		157B86AC1C8501910012755C /* InstructorAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B86AB1C8501910012755C /* InstructorAttendanceViewController.m */; };
+		15AE0E0F1C810A250015E1C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E0E1C810A250015E1C8 /* main.m */; };
+		15AE0E121C810A250015E1C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E111C810A250015E1C8 /* AppDelegate.m */; };
+		15AE0E1A1C810A250015E1C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15AE0E191C810A250015E1C8 /* Assets.xcassets */; };
+		15AE0E281C810A250015E1C8 /* RollCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E271C810A250015E1C8 /* RollCallTests.m */; };
+		15AE0E331C810A250015E1C8 /* RollCallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E321C810A250015E1C8 /* RollCallUITests.m */; };
+		15AE0E421C810E850015E1C8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E411C810E850015E1C8 /* LoginViewController.m */; };
+		15AE0E451C810F350015E1C8 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E441C810F350015E1C8 /* SignupViewController.m */; };
+		15B88F901C87A68700AA2563 /* ClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */; };
+		15B88F931C89080C00AA2563 /* AttendanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		15AE0E241C810A250015E1C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15AE0E021C810A250015E1C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15AE0E091C810A250015E1C8;
+			remoteInfo = RollCall;
+		};
+		15AE0E2F1C810A250015E1C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15AE0E021C810A250015E1C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15AE0E091C810A250015E1C8;
+			remoteInfo = RollCall;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		15155CC01C9F661800B80C1C /* RollCallNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollCallNavigationController.h; sourceTree = SOURCE_ROOT; };
+		15155CC11C9F661800B80C1C /* RollCallNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollCallNavigationController.m; sourceTree = SOURCE_ROOT; };
+		157B869E1C84FFB00012755C /* InstructorHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstructorHomePageViewController.h; path = RollCall/InstructorHomePageViewController.h; sourceTree = "<group>"; };
+		157B869F1C84FFB00012755C /* InstructorHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstructorHomePageViewController.m; path = RollCall/InstructorHomePageViewController.m; sourceTree = "<group>"; };
+		157B86A41C8500CE0012755C /* StudentHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentHomePageViewController.h; sourceTree = "<group>"; };
+		157B86A51C8500CE0012755C /* StudentHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentHomePageViewController.m; sourceTree = "<group>"; };
+		157B86A71C85017C0012755C /* StudentAttendanceHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentAttendanceHistoryViewController.h; sourceTree = "<group>"; };
+		157B86A81C85017C0012755C /* StudentAttendanceHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentAttendanceHistoryViewController.m; sourceTree = "<group>"; };
+		157B86AA1C8501910012755C /* InstructorAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructorAttendanceViewController.h; sourceTree = "<group>"; };
+		157B86AB1C8501910012755C /* InstructorAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorAttendanceViewController.m; sourceTree = "<group>"; };
+		15AE0E0A1C810A250015E1C8 /* RollCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RollCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15AE0E0E1C810A250015E1C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		15AE0E101C810A250015E1C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		15AE0E111C810A250015E1C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		15AE0E191C810A250015E1C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		15AE0E1E1C810A250015E1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15AE0E231C810A250015E1C8 /* RollCallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RollCallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15AE0E271C810A250015E1C8 /* RollCallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RollCallTests.m; sourceTree = "<group>"; };
+		15AE0E291C810A250015E1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15AE0E2E1C810A250015E1C8 /* RollCallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RollCallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15AE0E321C810A250015E1C8 /* RollCallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RollCallUITests.m; sourceTree = "<group>"; };
+		15AE0E341C810A250015E1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15AE0E401C810E850015E1C8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = RollCall/LoginViewController.h; sourceTree = "<group>"; };
+		15AE0E411C810E850015E1C8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = RollCall/LoginViewController.m; sourceTree = "<group>"; };
+		15AE0E431C810F350015E1C8 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = RollCall/SignupViewController.h; sourceTree = "<group>"; };
+		15AE0E441C810F350015E1C8 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = RollCall/SignupViewController.m; sourceTree = "<group>"; };
+		15B88F8E1C87A68700AA2563 /* ClassTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClassTableViewCell.h; path = ../ClassTableViewCell.h; sourceTree = "<group>"; };
+		15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClassTableViewCell.m; path = ../ClassTableViewCell.m; sourceTree = "<group>"; };
+		15B88F911C89080C00AA2563 /* AttendanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceTableViewCell.h; sourceTree = "<group>"; };
+		15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceTableViewCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15AE0E071C810A250015E1C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15AE0E201C810A250015E1C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15AE0E2B1C810A250015E1C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15155CBC1C9F653000B80C1C /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				15B88F8E1C87A68700AA2563 /* ClassTableViewCell.h */,
+				15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */,
+				15B88F911C89080C00AA2563 /* AttendanceTableViewCell.h */,
+				15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		157B86A11C8500780012755C /* Login / Signup Views */ = {
+			isa = PBXGroup;
+			children = (
+				15AE0E401C810E850015E1C8 /* LoginViewController.h */,
+				15AE0E411C810E850015E1C8 /* LoginViewController.m */,
+				15AE0E431C810F350015E1C8 /* SignupViewController.h */,
+				15AE0E441C810F350015E1C8 /* SignupViewController.m */,
+			);
+			name = "Login / Signup Views";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		157B86A21C85008D0012755C /* Instructor Views */ = {
+			isa = PBXGroup;
+			children = (
+				157B869E1C84FFB00012755C /* InstructorHomePageViewController.h */,
+				157B869F1C84FFB00012755C /* InstructorHomePageViewController.m */,
+				157B86AA1C8501910012755C /* InstructorAttendanceViewController.h */,
+				157B86AB1C8501910012755C /* InstructorAttendanceViewController.m */,
+			);
+			name = "Instructor Views";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		157B86A31C8500A20012755C /* Student Views */ = {
+			isa = PBXGroup;
+			children = (
+				157B86A41C8500CE0012755C /* StudentHomePageViewController.h */,
+				157B86A51C8500CE0012755C /* StudentHomePageViewController.m */,
+				157B86A71C85017C0012755C /* StudentAttendanceHistoryViewController.h */,
+				157B86A81C85017C0012755C /* StudentAttendanceHistoryViewController.m */,
+			);
+			name = "Student Views";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		15AE0E011C810A250015E1C8 = {
+			isa = PBXGroup;
+			children = (
+				15AE0E0C1C810A250015E1C8 /* RollCall */,
+				15AE0E261C810A250015E1C8 /* RollCallTests */,
+				15AE0E311C810A250015E1C8 /* RollCallUITests */,
+				15AE0E0B1C810A250015E1C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		15AE0E0B1C810A250015E1C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15AE0E0A1C810A250015E1C8 /* RollCall.app */,
+				15AE0E231C810A250015E1C8 /* RollCallTests.xctest */,
+				15AE0E2E1C810A250015E1C8 /* RollCallUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15AE0E0C1C810A250015E1C8 /* RollCall */ = {
+			isa = PBXGroup;
+			children = (
+				15AE0E101C810A250015E1C8 /* AppDelegate.h */,
+				15AE0E111C810A250015E1C8 /* AppDelegate.m */,
+				15155CC01C9F661800B80C1C /* RollCallNavigationController.h */,
+				15155CC11C9F661800B80C1C /* RollCallNavigationController.m */,
+				15155CBC1C9F653000B80C1C /* Table View Cells */,
+				157B86A11C8500780012755C /* Login / Signup Views */,
+				157B86A21C85008D0012755C /* Instructor Views */,
+				157B86A31C8500A20012755C /* Student Views */,
+				15AE0E191C810A250015E1C8 /* Assets.xcassets */,
+				15AE0E1E1C810A250015E1C8 /* Info.plist */,
+				15AE0E0D1C810A250015E1C8 /* Supporting Files */,
+			);
+			path = RollCall;
+			sourceTree = "<group>";
+		};
+		15AE0E0D1C810A250015E1C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				15AE0E0E1C810A250015E1C8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15AE0E261C810A250015E1C8 /* RollCallTests */ = {
+			isa = PBXGroup;
+			children = (
+				15AE0E271C810A250015E1C8 /* RollCallTests.m */,
+				15AE0E291C810A250015E1C8 /* Info.plist */,
+			);
+			path = RollCallTests;
+			sourceTree = "<group>";
+		};
+		15AE0E311C810A250015E1C8 /* RollCallUITests */ = {
+			isa = PBXGroup;
+			children = (
+				15AE0E321C810A250015E1C8 /* RollCallUITests.m */,
+				15AE0E341C810A250015E1C8 /* Info.plist */,
+			);
+			path = RollCallUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		15AE0E091C810A250015E1C8 /* RollCall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15AE0E371C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCall" */;
+			buildPhases = (
+				15AE0E061C810A250015E1C8 /* Sources */,
+				15AE0E071C810A250015E1C8 /* Frameworks */,
+				15AE0E081C810A250015E1C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RollCall;
+			productName = RollCall;
+			productReference = 15AE0E0A1C810A250015E1C8 /* RollCall.app */;
+			productType = "com.apple.product-type.application";
+		};
+		15AE0E221C810A250015E1C8 /* RollCallTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15AE0E3A1C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCallTests" */;
+			buildPhases = (
+				15AE0E1F1C810A250015E1C8 /* Sources */,
+				15AE0E201C810A250015E1C8 /* Frameworks */,
+				15AE0E211C810A250015E1C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15AE0E251C810A250015E1C8 /* PBXTargetDependency */,
+			);
+			name = RollCallTests;
+			productName = RollCallTests;
+			productReference = 15AE0E231C810A250015E1C8 /* RollCallTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		15AE0E2D1C810A250015E1C8 /* RollCallUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15AE0E3D1C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCallUITests" */;
+			buildPhases = (
+				15AE0E2A1C810A250015E1C8 /* Sources */,
+				15AE0E2B1C810A250015E1C8 /* Frameworks */,
+				15AE0E2C1C810A250015E1C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15AE0E301C810A250015E1C8 /* PBXTargetDependency */,
+			);
+			name = RollCallUITests;
+			productName = RollCallUITests;
+			productReference = 15AE0E2E1C810A250015E1C8 /* RollCallUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15AE0E021C810A250015E1C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Eric Wang";
+				TargetAttributes = {
+					15AE0E091C810A250015E1C8 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					15AE0E221C810A250015E1C8 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 15AE0E091C810A250015E1C8;
+					};
+					15AE0E2D1C810A250015E1C8 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 15AE0E091C810A250015E1C8;
+					};
+				};
+			};
+			buildConfigurationList = 15AE0E051C810A250015E1C8 /* Build configuration list for PBXProject "RollCall" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 15AE0E011C810A250015E1C8;
+			productRefGroup = 15AE0E0B1C810A250015E1C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				15AE0E091C810A250015E1C8 /* RollCall */,
+				15AE0E221C810A250015E1C8 /* RollCallTests */,
+				15AE0E2D1C810A250015E1C8 /* RollCallUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15AE0E081C810A250015E1C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15AE0E1A1C810A250015E1C8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15AE0E211C810A250015E1C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15AE0E2C1C810A250015E1C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15AE0E061C810A250015E1C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15AE0E121C810A250015E1C8 /* AppDelegate.m in Sources */,
+				15155CC21C9F661800B80C1C /* RollCallNavigationController.m in Sources */,
+				15AE0E0F1C810A250015E1C8 /* main.m in Sources */,
+				157B86AC1C8501910012755C /* InstructorAttendanceViewController.m in Sources */,
+				157B86A01C84FFB00012755C /* InstructorHomePageViewController.m in Sources */,
+				15AE0E451C810F350015E1C8 /* SignupViewController.m in Sources */,
+				157B86A91C85017C0012755C /* StudentAttendanceHistoryViewController.m in Sources */,
+				157B86A61C8500CE0012755C /* StudentHomePageViewController.m in Sources */,
+				15AE0E421C810E850015E1C8 /* LoginViewController.m in Sources */,
+				15B88F931C89080C00AA2563 /* AttendanceTableViewCell.m in Sources */,
+				15B88F901C87A68700AA2563 /* ClassTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15AE0E1F1C810A250015E1C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15AE0E281C810A250015E1C8 /* RollCallTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15AE0E2A1C810A250015E1C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15AE0E331C810A250015E1C8 /* RollCallUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		15AE0E251C810A250015E1C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15AE0E091C810A250015E1C8 /* RollCall */;
+			targetProxy = 15AE0E241C810A250015E1C8 /* PBXContainerItemProxy */;
+		};
+		15AE0E301C810A250015E1C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15AE0E091C810A250015E1C8 /* RollCall */;
+			targetProxy = 15AE0E2F1C810A250015E1C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		15AE0E351C810A250015E1C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		15AE0E361C810A250015E1C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		15AE0E381C810A250015E1C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RollCall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCall";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		15AE0E391C810A250015E1C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RollCall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCall";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		15AE0E3B1C810A250015E1C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RollCallTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCallTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RollCall.app/RollCall";
+			};
+			name = Debug;
+		};
+		15AE0E3C1C810A250015E1C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RollCallTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCallTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RollCall.app/RollCall";
+			};
+			name = Release;
+		};
+		15AE0E3E1C810A250015E1C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RollCallUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCallUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RollCall;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		15AE0E3F1C810A250015E1C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RollCallUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCallUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RollCall;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15AE0E051C810A250015E1C8 /* Build configuration list for PBXProject "RollCall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15AE0E351C810A250015E1C8 /* Debug */,
+				15AE0E361C810A250015E1C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15AE0E371C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15AE0E381C810A250015E1C8 /* Debug */,
+				15AE0E391C810A250015E1C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15AE0E3A1C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCallTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15AE0E3B1C810A250015E1C8 /* Debug */,
+				15AE0E3C1C810A250015E1C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15AE0E3D1C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCallUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15AE0E3E1C810A250015E1C8 /* Debug */,
+				15AE0E3F1C810A250015E1C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15AE0E021C810A250015E1C8 /* Project object */;
+}

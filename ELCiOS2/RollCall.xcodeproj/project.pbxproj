@@ -21,6 +21,7 @@
 		15AE0E451C810F350015E1C8 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E441C810F350015E1C8 /* SignupViewController.m */; };
 		15B88F901C87A68700AA2563 /* ClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */; };
 		15B88F931C89080C00AA2563 /* AttendanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */; };
+		18051AF6B024AF1680D00252 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 342A6E3C04EA7D8925AD241B /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,9 @@
 		15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClassTableViewCell.m; path = ../ClassTableViewCell.m; sourceTree = "<group>"; };
 		15B88F911C89080C00AA2563 /* AttendanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceTableViewCell.h; sourceTree = "<group>"; };
 		15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceTableViewCell.m; sourceTree = "<group>"; };
+		342A6E3C04EA7D8925AD241B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4284E1F7CC04D0A19928E63C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D596414BE2FBC9A553F3360E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18051AF6B024AF1680D00252 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +157,8 @@
 				15AE0E261C810A250015E1C8 /* RollCallTests */,
 				15AE0E311C810A250015E1C8 /* RollCallUITests */,
 				15AE0E0B1C810A250015E1C8 /* Products */,
+				31AA864EDFF6AB298E6EC72D /* Pods */,
+				D53D0A970CB151186C2FFCAF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +216,23 @@
 			path = RollCallUITests;
 			sourceTree = "<group>";
 		};
+		31AA864EDFF6AB298E6EC72D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D596414BE2FBC9A553F3360E /* Pods.debug.xcconfig */,
+				4284E1F7CC04D0A19928E63C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D53D0A970CB151186C2FFCAF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				342A6E3C04EA7D8925AD241B /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -216,9 +240,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 15AE0E371C810A250015E1C8 /* Build configuration list for PBXNativeTarget "RollCall" */;
 			buildPhases = (
+				8B28C18E960894BE132D790B /* Check Pods Manifest.lock */,
 				15AE0E061C810A250015E1C8 /* Sources */,
 				15AE0E071C810A250015E1C8 /* Frameworks */,
 				15AE0E081C810A250015E1C8 /* Resources */,
+				C40F2A066BBE59932B3DB295 /* Embed Pods Frameworks */,
+				E88A67556C176048B35A3365 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -331,6 +358,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B28C18E960894BE132D790B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C40F2A066BBE59932B3DB295 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E88A67556C176048B35A3365 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		15AE0E061C810A250015E1C8 /* Sources */ = {
@@ -465,6 +540,7 @@
 		};
 		15AE0E381C810A250015E1C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D596414BE2FBC9A553F3360E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RollCall/Info.plist;
@@ -476,6 +552,7 @@
 		};
 		15AE0E391C810A250015E1C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4284E1F7CC04D0A19928E63C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RollCall/Info.plist;

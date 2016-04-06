@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
@@ -128,6 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
+
         switch (v.getId()){
             case R.id.loginButton:
                 Log.d(TAG, "Register login Clicked");
@@ -135,18 +138,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    Toast.makeText(getApplicationContext(),"Please enter a valid email address", Toast.LENGTH_SHORT).show();
 //                }
 //                else{
-                Intent intentLogin;
-                if(true) {
-                    intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
-                }
-                else {
-                    intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
 
-                }
-                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
-                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
 
-                startActivity(intentLogin);
+                ref.authWithPassword(textEmailAddress.toString(),
+                        textPassword.toString(),
+                        new Firebase.AuthResultHandler() {
+                            @Override
+                            public void onAuthenticated(AuthData authData) {
+                                Toast.makeText(getApplicationContext(),
+                                        "User logged in!", Toast.LENGTH_LONG).show();
+                                Intent intentLogin;
+                                if (true) {
+                                    intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
+                                } else {
+                                    intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+
+                                }
+                                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
+                                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+
+                                startActivity(intentLogin);
+                            }
+
+                            @Override
+                            public void onAuthenticationError(FirebaseError firebaseError) {
+                                Toast.makeText(getApplicationContext(),
+                                        "User NOT logged in!", Toast.LENGTH_LONG).show();
+                                Log.d(TAG, "hey");
+                                Log.d(TAG, textEmailAddress.toString());
+                                Log.d(TAG, textPassword.toString());
+                            }
+
+
+                        });
 //                }
                 break;
 
@@ -187,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentRegister);
 
                 Log.d(TAG, "I'm here");
-                Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
                 Log.d(TAG, getResources().getString(R.string.Firebase_url));
                 Log.d(TAG, "I'm here again");
                 ref.createUser(editTextNewEmail.getText().toString(),

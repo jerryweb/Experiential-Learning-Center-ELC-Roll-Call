@@ -1,5 +1,8 @@
 package webb.jerry.elcappandroid;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 import java.util.Map;
+import java.util.Set;
 
 import static webb.jerry.elcappandroid.R.*;
 
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button forgotPasswordButton;
     Button loginButton;
     Button registerButton;
+    BluetoothAdapter bluetoothAdapter;
+    Set<BluetoothDevice> deviceSet;
 
     // This is for registering a new user
     View viewRegister;
@@ -90,8 +96,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(bluetoothAdapter == null){
+            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else{
+            if(!bluetoothAdapter.isEnabled()){
+                Intent intent = new Intent(bluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(intent, 1);
+            }
+            else{
+                getPairedDevices();
+            }
+        }
 
 
+    }
+
+    private void getPairedDevices(){
+        deviceSet = bluetoothAdapter.getBondedDevices();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_CANCELED){
+            Toast.makeText(getApplicationContext(),"Bluetooth must be enabled to continue", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override

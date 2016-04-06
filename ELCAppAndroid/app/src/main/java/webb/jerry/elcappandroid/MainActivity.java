@@ -96,20 +96,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(bluetoothAdapter == null){
-            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        else{
-            if(!bluetoothAdapter.isEnabled()){
-                Intent intent = new Intent(bluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(intent, 1);
-            }
-            else{
-                getPairedDevices();
-            }
-        }
+//        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        if(bluetoothAdapter == null){
+//            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//        else{
+//            if(!bluetoothAdapter.isEnabled()){
+//                Intent intent = new Intent(bluetoothAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(intent, 1);
+//            }
+//            else{
+//                getPairedDevices();
+//            }
+//        }
 
 
     }

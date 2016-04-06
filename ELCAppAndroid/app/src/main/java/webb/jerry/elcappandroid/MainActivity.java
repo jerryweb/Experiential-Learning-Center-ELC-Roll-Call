@@ -18,6 +18,7 @@ import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -129,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
 
         switch (v.getId()){
             case R.id.loginButton:
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                }
 //                else{
 
-
+                Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
                 ref.authWithPassword(textEmailAddress.toString(),
                         textPassword.toString(),
                         new Firebase.AuthResultHandler() {
@@ -163,10 +163,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onAuthenticationError(FirebaseError firebaseError) {
                                 Toast.makeText(getApplicationContext(),
-                                        "User NOT logged in!", Toast.LENGTH_LONG).show();
+                                       firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "hey");
-                                Log.d(TAG, textEmailAddress.toString());
-                                Log.d(TAG, textPassword.toString());
+                                Log.d(TAG, textEmailAddress.getText().toString());
+                                Log.d(TAG, textPassword.getText().toString());
                             }
 
 
@@ -210,17 +210,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intentRegister.putExtra(StudentClassManagementActivity.EXTRA_USER_TYPE, userType);
                 startActivity(intentRegister);
 
+                Firebase ref2 = new Firebase(getResources().getString(R.string.Firebase_url));
                 Log.d(TAG, "I'm here");
                 Log.d(TAG, getResources().getString(R.string.Firebase_url));
                 Log.d(TAG, "I'm here again");
-                ref.createUser(editTextNewEmail.getText().toString(),
+                ref2.createUser(editTextNewEmail.getText().toString(),
                         editTextNewPassword.getText().toString(),
                         new Firebase.ValueResultHandler<Map<String, Object>>() {
                             @Override
                             public void onSuccess(Map<String, Object> stringObjectMap) {
                                 Log.d(TAG, "I'm here again");
+                                Log.d(TAG, editTextNewEmail.getText().toString());
+                                Log.d(TAG, editTextNewPassword.getText().toString());
                                 Toast.makeText(getApplicationContext(),
                                         "User created!", Toast.LENGTH_LONG).show();
+                                //Log.d(TAG, Integer.toString(stringObjectMap.size()));;
+                                   // Log.d(TAG, entry.getKey());
+                                   // Log.d(TAG, entry.getValue().toString());
                             }
 
                             @Override

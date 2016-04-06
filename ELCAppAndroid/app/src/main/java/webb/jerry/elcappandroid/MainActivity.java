@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                else{
 
                 Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
-                ref.authWithPassword(textEmailAddress.toString(),
-                        textPassword.toString(),
+                ref.authWithPassword(textEmailAddress.getText().toString(),
+                        textPassword.getText().toString(),
                         new Firebase.AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
@@ -164,9 +164,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onAuthenticationError(FirebaseError firebaseError) {
                                 Toast.makeText(getApplicationContext(),
                                        firebaseError.getMessage(), Toast.LENGTH_LONG).show();
-                                Log.d(TAG, "hey");
-                                Log.d(TAG, textEmailAddress.getText().toString());
-                                Log.d(TAG, textPassword.getText().toString());
                             }
 
 
@@ -224,9 +221,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Log.d(TAG, editTextNewPassword.getText().toString());
                                 Toast.makeText(getApplicationContext(),
                                         "User created!", Toast.LENGTH_LONG).show();
-                                //Log.d(TAG, Integer.toString(stringObjectMap.size()));;
-                                   // Log.d(TAG, entry.getKey());
-                                   // Log.d(TAG, entry.getValue().toString());
                             }
 
                             @Override

@@ -24,7 +24,7 @@
             android:label="Manage Instructor Courses">
         </activity>
         <activity
-            android:name=".ClassManagementActivity"
+            android:name=".StudentClassManagementActivity"
             android:label="Manage Student Courses">
         </activity>
     </application>

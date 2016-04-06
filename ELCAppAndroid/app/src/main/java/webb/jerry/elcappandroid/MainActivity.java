@@ -6,14 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import webb.jerry.elcappandroid.Constants;
 
 
 import com.firebase.client.Firebase;
@@ -139,14 +137,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                else{
                 Intent intentLogin;
                 if(true) {
-                    intentLogin = new Intent(getApplicationContext(), ClassManagementActivity.class);
+                    intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
                 }
                 else {
                     intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
 
                 }
-                intentLogin.putExtra(ClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
-                intentLogin.putExtra(ClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
+                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
 
                 startActivity(intentLogin);
 //                }
@@ -174,18 +172,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonCreateAccount:
                 Intent intentRegister;
                 if(true) {
-                    intentRegister = new Intent(getApplicationContext(), ClassManagementActivity.class);
+                    intentRegister = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
                 }
                 else {
                     intentRegister = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
                 }
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_EMAIL_ADDRESS, editTextNewEmail.getText());
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_PASSWORD, editTextNewPassword.getText());
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_CONFIRM_PASSWORD, editTextNewConfirmPass.getText());
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_FIRST_NAME, editTextfirstName.getText());
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_LAST_NAME, editTextLastName.getText());
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_UNIVERSITY_ID, editTextUniversityId.getText());
-                intentRegister.putExtra(ClassManagementActivity.EXTRA_USER_TYPE, userType);
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, editTextNewEmail.getText());
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, editTextNewPassword.getText());
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_CONFIRM_PASSWORD, editTextNewConfirmPass.getText());
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_FIRST_NAME, editTextfirstName.getText());
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_LAST_NAME, editTextLastName.getText());
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_UNIVERSITY_ID, editTextUniversityId.getText());
+                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_USER_TYPE, userType);
                 startActivity(intentRegister);
 
                 Log.d(TAG, "I'm here");
@@ -199,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onSuccess(Map<String, Object> stringObjectMap) {
                                 Log.d(TAG, "I'm here again");
                                 Toast.makeText(getApplicationContext(),
-                                        "User created!", Toast.LENGTH_SHORT).show();
+                                        "User created!", Toast.LENGTH_LONG).show();
                             }
 
                             @Override

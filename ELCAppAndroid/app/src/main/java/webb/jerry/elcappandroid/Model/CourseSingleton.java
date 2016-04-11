@@ -16,7 +16,32 @@ public class CourseSingleton {
     private CourseSingleton(Context c){
         mCourses = new ArrayList<Course>();
         this.mAppContext = c;
+    }
 
+    public static CourseSingleton get(Context c) {
+        if (sCourseSingleton == null) {
+            sCourseSingleton = new CourseSingleton(c.getApplicationContext());
+        }
+        return sCourseSingleton;
+    }
+
+    public ArrayList<Course> getMCourses() {
+        return mCourses;
+    }
+
+    public void addCourse(Course c){
+        mCourses.add(c);
+    }
+
+    public void removeCourse(Course c){
+
+        if(!mCourses.isEmpty()){
+            for(Course course: mCourses){
+                if (c == course){
+                    mCourses.remove(c);
+                }
+            }
+        }
 
     }
 }

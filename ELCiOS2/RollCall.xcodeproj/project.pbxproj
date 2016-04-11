@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		15155CC21C9F661800B80C1C /* RollCallNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15155CC11C9F661800B80C1C /* RollCallNavigationController.m */; };
-		157B86A01C84FFB00012755C /* InstructorHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B869F1C84FFB00012755C /* InstructorHomePageViewController.m */; };
 		157B86A61C8500CE0012755C /* StudentHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B86A51C8500CE0012755C /* StudentHomePageViewController.m */; };
 		157B86A91C85017C0012755C /* StudentAttendanceHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B86A81C85017C0012755C /* StudentAttendanceHistoryViewController.m */; };
-		157B86AC1C8501910012755C /* InstructorAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B86AB1C8501910012755C /* InstructorAttendanceViewController.m */; };
 		15AE0E0F1C810A250015E1C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E0E1C810A250015E1C8 /* main.m */; };
 		15AE0E121C810A250015E1C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E111C810A250015E1C8 /* AppDelegate.m */; };
 		15AE0E1A1C810A250015E1C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15AE0E191C810A250015E1C8 /* Assets.xcassets */; };
@@ -19,6 +17,10 @@
 		15AE0E331C810A250015E1C8 /* RollCallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E321C810A250015E1C8 /* RollCallUITests.m */; };
 		15AE0E421C810E850015E1C8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E411C810E850015E1C8 /* LoginViewController.m */; };
 		15AE0E451C810F350015E1C8 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE0E441C810F350015E1C8 /* SignupViewController.m */; };
+		15B2FB151CB75F6100159EA3 /* ClassSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B2FB141CB75F6100159EA3 /* ClassSession.m */; };
+		15B2FB191CBB653D00159EA3 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B2FB181CBB653D00159EA3 /* ForgotPasswordViewController.m */; };
+		15B2FB1D1CBB6A9800159EA3 /* AdminHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B2FB1C1CBB6A9800159EA3 /* AdminHomePageViewController.m */; };
+		15B2FB201CBB6FA800159EA3 /* AddNewClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B2FB1F1CBB6FA800159EA3 /* AddNewClassViewController.m */; };
 		15B88F901C87A68700AA2563 /* ClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */; };
 		15B88F931C89080C00AA2563 /* AttendanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */; };
 		18051AF6B024AF1680D00252 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 342A6E3C04EA7D8925AD241B /* libPods.a */; };
@@ -44,14 +46,10 @@
 /* Begin PBXFileReference section */
 		15155CC01C9F661800B80C1C /* RollCallNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollCallNavigationController.h; sourceTree = SOURCE_ROOT; };
 		15155CC11C9F661800B80C1C /* RollCallNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollCallNavigationController.m; sourceTree = SOURCE_ROOT; };
-		157B869E1C84FFB00012755C /* InstructorHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstructorHomePageViewController.h; path = RollCall/InstructorHomePageViewController.h; sourceTree = "<group>"; };
-		157B869F1C84FFB00012755C /* InstructorHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstructorHomePageViewController.m; path = RollCall/InstructorHomePageViewController.m; sourceTree = "<group>"; };
 		157B86A41C8500CE0012755C /* StudentHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentHomePageViewController.h; sourceTree = "<group>"; };
 		157B86A51C8500CE0012755C /* StudentHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentHomePageViewController.m; sourceTree = "<group>"; };
 		157B86A71C85017C0012755C /* StudentAttendanceHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentAttendanceHistoryViewController.h; sourceTree = "<group>"; };
 		157B86A81C85017C0012755C /* StudentAttendanceHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentAttendanceHistoryViewController.m; sourceTree = "<group>"; };
-		157B86AA1C8501910012755C /* InstructorAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructorAttendanceViewController.h; sourceTree = "<group>"; };
-		157B86AB1C8501910012755C /* InstructorAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorAttendanceViewController.m; sourceTree = "<group>"; };
 		15AE0E0A1C810A250015E1C8 /* RollCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RollCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15AE0E0E1C810A250015E1C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		15AE0E101C810A250015E1C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,6 +66,14 @@
 		15AE0E411C810E850015E1C8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = RollCall/LoginViewController.m; sourceTree = "<group>"; };
 		15AE0E431C810F350015E1C8 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = RollCall/SignupViewController.h; sourceTree = "<group>"; };
 		15AE0E441C810F350015E1C8 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = RollCall/SignupViewController.m; sourceTree = "<group>"; };
+		15B2FB131CB75F6100159EA3 /* ClassSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassSession.h; sourceTree = "<group>"; };
+		15B2FB141CB75F6100159EA3 /* ClassSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassSession.m; sourceTree = "<group>"; };
+		15B2FB171CBB653D00159EA3 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		15B2FB181CBB653D00159EA3 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		15B2FB1B1CBB6A9800159EA3 /* AdminHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminHomePageViewController.h; sourceTree = "<group>"; };
+		15B2FB1C1CBB6A9800159EA3 /* AdminHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminHomePageViewController.m; sourceTree = "<group>"; };
+		15B2FB1E1CBB6FA800159EA3 /* AddNewClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewClassViewController.h; sourceTree = "<group>"; };
+		15B2FB1F1CBB6FA800159EA3 /* AddNewClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewClassViewController.m; sourceTree = "<group>"; };
 		15B88F8E1C87A68700AA2563 /* ClassTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClassTableViewCell.h; path = ../ClassTableViewCell.h; sourceTree = "<group>"; };
 		15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClassTableViewCell.m; path = ../ClassTableViewCell.m; sourceTree = "<group>"; };
 		15B88F911C89080C00AA2563 /* AttendanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceTableViewCell.h; sourceTree = "<group>"; };
@@ -119,22 +125,12 @@
 			children = (
 				15AE0E401C810E850015E1C8 /* LoginViewController.h */,
 				15AE0E411C810E850015E1C8 /* LoginViewController.m */,
+				15B2FB171CBB653D00159EA3 /* ForgotPasswordViewController.h */,
+				15B2FB181CBB653D00159EA3 /* ForgotPasswordViewController.m */,
 				15AE0E431C810F350015E1C8 /* SignupViewController.h */,
 				15AE0E441C810F350015E1C8 /* SignupViewController.m */,
 			);
 			name = "Login / Signup Views";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		157B86A21C85008D0012755C /* Instructor Views */ = {
-			isa = PBXGroup;
-			children = (
-				157B869E1C84FFB00012755C /* InstructorHomePageViewController.h */,
-				157B869F1C84FFB00012755C /* InstructorHomePageViewController.m */,
-				157B86AA1C8501910012755C /* InstructorAttendanceViewController.h */,
-				157B86AB1C8501910012755C /* InstructorAttendanceViewController.m */,
-			);
-			name = "Instructor Views";
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -153,6 +149,7 @@
 		15AE0E011C810A250015E1C8 = {
 			isa = PBXGroup;
 			children = (
+				15B2FB161CB75F7200159EA3 /* Model */,
 				15AE0E0C1C810A250015E1C8 /* RollCall */,
 				15AE0E261C810A250015E1C8 /* RollCallTests */,
 				15AE0E311C810A250015E1C8 /* RollCallUITests */,
@@ -181,8 +178,8 @@
 				15155CC11C9F661800B80C1C /* RollCallNavigationController.m */,
 				15155CBC1C9F653000B80C1C /* Table View Cells */,
 				157B86A11C8500780012755C /* Login / Signup Views */,
-				157B86A21C85008D0012755C /* Instructor Views */,
 				157B86A31C8500A20012755C /* Student Views */,
+				15B2FB1A1CBB6A7700159EA3 /* Admin Views */,
 				15AE0E191C810A250015E1C8 /* Assets.xcassets */,
 				15AE0E1E1C810A250015E1C8 /* Info.plist */,
 				15AE0E0D1C810A250015E1C8 /* Supporting Files */,
@@ -214,6 +211,27 @@
 				15AE0E341C810A250015E1C8 /* Info.plist */,
 			);
 			path = RollCallUITests;
+			sourceTree = "<group>";
+		};
+		15B2FB161CB75F7200159EA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15B2FB131CB75F6100159EA3 /* ClassSession.h */,
+				15B2FB141CB75F6100159EA3 /* ClassSession.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		15B2FB1A1CBB6A7700159EA3 /* Admin Views */ = {
+			isa = PBXGroup;
+			children = (
+				15B2FB1B1CBB6A9800159EA3 /* AdminHomePageViewController.h */,
+				15B2FB1C1CBB6A9800159EA3 /* AdminHomePageViewController.m */,
+				15B2FB1E1CBB6FA800159EA3 /* AddNewClassViewController.h */,
+				15B2FB1F1CBB6FA800159EA3 /* AddNewClassViewController.m */,
+			);
+			name = "Admin Views";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		31AA864EDFF6AB298E6EC72D /* Pods */ = {
@@ -303,6 +321,7 @@
 				TargetAttributes = {
 					15AE0E091C810A250015E1C8 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = GNH4G8M8G6;
 					};
 					15AE0E221C810A250015E1C8 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -412,12 +431,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B2FB191CBB653D00159EA3 /* ForgotPasswordViewController.m in Sources */,
 				15AE0E121C810A250015E1C8 /* AppDelegate.m in Sources */,
+				15B2FB151CB75F6100159EA3 /* ClassSession.m in Sources */,
 				15155CC21C9F661800B80C1C /* RollCallNavigationController.m in Sources */,
+				15B2FB201CBB6FA800159EA3 /* AddNewClassViewController.m in Sources */,
 				15AE0E0F1C810A250015E1C8 /* main.m in Sources */,
-				157B86AC1C8501910012755C /* InstructorAttendanceViewController.m in Sources */,
-				157B86A01C84FFB00012755C /* InstructorHomePageViewController.m in Sources */,
 				15AE0E451C810F350015E1C8 /* SignupViewController.m in Sources */,
+				15B2FB1D1CBB6A9800159EA3 /* AdminHomePageViewController.m in Sources */,
 				157B86A91C85017C0012755C /* StudentAttendanceHistoryViewController.m in Sources */,
 				157B86A61C8500CE0012755C /* StudentHomePageViewController.m in Sources */,
 				15AE0E421C810E850015E1C8 /* LoginViewController.m in Sources */,
@@ -543,6 +564,7 @@
 			baseConfigurationReference = D596414BE2FBC9A553F3360E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RollCall/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCall";
@@ -555,6 +577,7 @@
 			baseConfigurationReference = 4284E1F7CC04D0A19928E63C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RollCall/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Eric-Wang.RollCall";

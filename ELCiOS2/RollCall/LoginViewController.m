@@ -7,10 +7,12 @@
 //
 
 #import "LoginViewController.h"
-#import "InstructorHomePageViewController.h"
 #import "StudentHomePageViewController.h"
+#import "AdminHomePageViewController.h"
 #import "SignupViewController.h"
+#import "ForgotPasswordViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Firebase/Firebase.h>
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -57,11 +59,11 @@
     _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     //_passwordField.secureTextEntry = YES;
 
-    
     // config forgot password button
     _forgotPasswordButton = [[UIButton alloc]initWithFrame:CGRectMake(79, 295, 130, 15)];
     [_forgotPasswordButton setTitle:@"Forgot Your Password?" forState:UIControlStateNormal];
     [_forgotPasswordButton setTitleColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [_forgotPasswordButton addTarget:self action:@selector(openForgotPassword:) forControlEvents:UIControlEventTouchUpInside];
     _forgotPasswordButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
     
     // config login button
@@ -97,9 +99,16 @@
     [self.navigationController pushViewController:svc animated:NO];
 }
 
+- (void)openForgotPassword:(UIButton *)sender {
+    ForgotPasswordViewController *fvc = [[ForgotPasswordViewController alloc] init];
+    [self.navigationController pushViewController:fvc animated:NO];
+}
+
 - (void)login:(UIButton *)sender {
-    InstructorHomePageViewController *ivc = [[InstructorHomePageViewController alloc] init];
-    [self.navigationController pushViewController:ivc animated:NO];
+    //StudentHomePageViewController *ivc = [[StudentHomePageViewController alloc] init];
+    //[self.navigationController pushViewController:ivc animated:NO];
+    AdminHomePageViewController *avc = [[AdminHomePageViewController alloc] init];
+    [self.navigationController pushViewController:avc animated:NO];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

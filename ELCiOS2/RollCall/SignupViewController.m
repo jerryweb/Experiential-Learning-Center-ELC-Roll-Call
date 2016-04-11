@@ -7,18 +7,15 @@
 //
 
 #import "SignupViewController.h"
-#import "InstructorHomepageViewController.h"
 #import "StudentHomepageViewController.h"
 
 @interface SignupViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) UILabel *titleLabel;
-@property (nonatomic,strong) UISegmentedControl *studentInstructorPicker;
 @property (nonatomic,strong) UITextField *firstNameField;
 @property (nonatomic,strong) UITextField *lastNameField;
 @property (nonatomic,strong) UITextField *emailField;
 @property (nonatomic,strong) UITextField *universityIDField;
-@property (nonatomic,strong) UITextField *beaconIDField;
 @property (nonatomic,strong) UITextField *passwordField;
 @property (nonatomic,strong) UITextField *confirmPasswordField;
 @property (nonatomic,strong) UIButton *confirmButton;
@@ -36,15 +33,6 @@
     _titleLabel.text = @"RollCall";
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:36];
-    
-    // config segmented control
-    [[UISegmentedControl appearance] setTintColor:[UIColor colorWithRed:80/255.0 green:227/255.0 blue:194/255.0 alpha:1.0]];
-    NSArray *optionsArray = @[@"Student",@"Instrutor"];
-    _studentInstructorPicker = [[UISegmentedControl alloc] initWithItems:optionsArray];
-    _studentInstructorPicker.frame = CGRectMake(38, 167, 300, 26);
-    _studentInstructorPicker.segmentedControlStyle = UISegmentedControlStylePlain;
-    _studentInstructorPicker.selectedSegmentIndex = 0;
-    [_studentInstructorPicker addTarget:self action:@selector(toggleSignup:) forControlEvents:UIControlEventValueChanged];
     
     // config first name field
     _firstNameField = [[UITextField alloc] initWithFrame:CGRectMake(38, 213, 120, 23)];
@@ -77,15 +65,6 @@
     _universityIDField.font = [UIFont fontWithName:@"HelveticaNeue" size:20];
     _universityIDField.delegate = self;
     _universityIDField.tintColor = [UIColor clearColor];
-    
-    // config beacon id field
-    _beaconIDField = [[UITextField alloc] initWithFrame:CGRectMake(38, 372, 160, 23)];
-    _beaconIDField.text = @"Beacon ID #";
-    _beaconIDField.textColor = [UIColor whiteColor];
-    _beaconIDField.font = [UIFont fontWithName:@"HelveticaNeue" size:20];
-    _beaconIDField.hidden = YES;
-    _beaconIDField.delegate = self;
-    _beaconIDField.tintColor = [UIColor clearColor];
     
     // config password field
     _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(38, 425, 160, 23)];
@@ -126,11 +105,9 @@
     [_cancelButton addTarget:self action:@selector(cancelSignup:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_titleLabel];
-    [self.view addSubview:_studentInstructorPicker];
     [self.view addSubview:_firstNameField];
     [self.view addSubview:_lastNameField];
     [self.view addSubview:_emailField];
-    [self.view addSubview:_beaconIDField];
     [self.view addSubview:_universityIDField];
     [self.view addSubview:_passwordField];
     [self.view addSubview:_confirmPasswordField];
@@ -161,19 +138,8 @@
 }
 
 - (void)createAccount:(UIButton *)sender {
-    InstructorHomePageViewController *ivc = [[InstructorHomePageViewController alloc] init];
     StudentHomePageViewController *svc = [[StudentHomePageViewController alloc] init];
     [self.navigationController pushViewController:svc animated:NO];
-}
-
-- (void)toggleSignup:(UISegmentedControl *)segment {
-    if(segment.selectedSegmentIndex == 0) {
-        _beaconIDField.hidden = YES;
-        _universityIDField.hidden = NO;
-    } else if (segment.selectedSegmentIndex == 1) {
-        _beaconIDField.hidden = NO;
-        _universityIDField.hidden = YES;
-    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

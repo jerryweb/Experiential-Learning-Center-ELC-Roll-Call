@@ -44,7 +44,6 @@
     [_backButton setBackgroundColor:[UIColor colorWithRed:80/255.0 green:227/255.0 blue:194/255.0 alpha:.6]];
     [_backButton addTarget:self action:@selector(returnToPreviousPage:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_backButton];
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -78,7 +77,6 @@
 }
 
 - (void)returnToPreviousPage:(UIButton *)sender {
-    StudentHomePageViewController *svc = [[StudentHomePageViewController alloc] init];
     [self.navigationController popViewControllerAnimated:NO];
 }
 

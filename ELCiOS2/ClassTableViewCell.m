@@ -44,9 +44,8 @@
     UIImage *attendanceMark = [UIImage imageNamed:@"Present"];
     [_attendanceStatus setImage:attendanceMark];
     [self addSubview:_attendanceStatus];
-        
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
-    
     return self;
 }
 

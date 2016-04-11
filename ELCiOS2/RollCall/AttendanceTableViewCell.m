@@ -22,7 +22,7 @@
     backgroundView.layer.cornerRadius = 5;
     backgroundView.layer.masksToBounds = YES;
     [self addSubview:backgroundView];
-        
+         
     _nameDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 7, 150, 15)];
     _nameDateLabel.textColor = [UIColor whiteColor];
     _nameDateLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
@@ -32,6 +32,8 @@
     UIImage *attendanceMark = [UIImage imageNamed:@"Absent"];
     [_attendanceTracker setImage:attendanceMark];
     //[self addSubview:_attendanceTracker];
+        
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     }
     

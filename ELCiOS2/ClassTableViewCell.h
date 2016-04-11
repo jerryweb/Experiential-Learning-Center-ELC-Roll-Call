@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 static NSString * const kCellIDStudent = @"StudentClass";
-static NSString * const kCellIDInstructor = @"InstructorClass";
 
 @interface ClassTableViewCell : UITableViewCell
 

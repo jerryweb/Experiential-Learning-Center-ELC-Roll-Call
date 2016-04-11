@@ -11,6 +11,6 @@
 @interface StudentHomePageViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UISegmentedControl *attendanceFilesPicker;
-@property (nonatomic,strong) UITableView *classesTable, *filesTable;
+@property (nonatomic,strong) UITableView *classesTable;
 
 @end

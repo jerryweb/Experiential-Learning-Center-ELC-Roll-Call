@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import "StudentHomepageViewController.h"
+#import <Firebase/Firebase.h>
 
 @interface SignupViewController () <UITextFieldDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic,strong) UITextField *confirmPasswordField;
 @property (nonatomic,strong) UIButton *confirmButton;
 @property (nonatomic,strong) UIButton *cancelButton;
+@property (nonatomic,strong) Firebase *myRootRef;
 
 @end
 
@@ -27,6 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _myRootRef = [[Firebase alloc] initWithUrl:@"https://rollcall-401.firebaseio.com/"];
     
     // config title
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(126, 100, 123, 43)];
@@ -138,6 +142,24 @@
 }
 
 - (void)createAccount:(UIButton *)sender {
+    NSString *studentName = [[_firstNameField.text stringByAppendingString:@" "] stringByAppendingString:_lastNameField.text];
+    NSString *email = _emailField.text;
+    NSString *UID = _universityIDField.text;
+    if ([_passwordField.text isEqualToString:_confirmPasswordField.text]) {
+        NSString *password = _passwordField.text;
+        
+        [_myRootRef createUser:email password:password withValueCompletionBlock:^(NSError *error, NSDictionary *result) {
+            if (error) {
+                NSLog(@"an error occured");
+            } else {
+                NSString *uid = [result objectForKey:@"uid"];
+                NSLog(@"successfully created a user with uid: %@",uid);
+            }
+        }];
+    }
+    
+    
+    
     StudentHomePageViewController *svc = [[StudentHomePageViewController alloc] init];
     [self.navigationController pushViewController:svc animated:NO];
 }

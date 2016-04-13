@@ -22,6 +22,7 @@
 @property (nonatomic,strong) UIButton *forgotPasswordButton;
 @property (nonatomic,strong) UIButton *loginButton;
 @property (nonatomic,strong) UIButton *registerButton;
+@property (nonatomic,strong) Firebase *myRootRef;
 
 @end
 
@@ -29,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _myRootRef = [[Firebase alloc] initWithUrl:@"https://rollcall-401.firebaseio.com/"];
     
     // config title
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(126, 100, 123, 43)];
@@ -105,10 +108,19 @@
 }
 
 - (void)login:(UIButton *)sender {
-    //StudentHomePageViewController *ivc = [[StudentHomePageViewController alloc] init];
-    //[self.navigationController pushViewController:ivc animated:NO];
-    AdminHomePageViewController *avc = [[AdminHomePageViewController alloc] init];
-    [self.navigationController pushViewController:avc animated:NO];
+    NSString *email = _emailField.text;
+    NSString *password = _passwordField.text;
+    
+    [_myRootRef authUser:email password:password withCompletionBlock:^(NSError *error, FAuthData *authData) {
+        if (error) {
+            NSLog(@"there was an error");
+        } else {
+            StudentHomePageViewController *ivc = [[StudentHomePageViewController alloc] init];
+            [self.navigationController pushViewController:ivc animated:NO];
+            //AdminHomePageViewController *avc = [[AdminHomePageViewController alloc] init];
+            //[self.navigationController pushViewController:avc animated:NO];
+        }
+    }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

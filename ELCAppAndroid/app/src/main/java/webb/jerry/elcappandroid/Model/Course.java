@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by LJ on 3/5/16.
+ * This class holds all the information for the 'course' object including name, instructor name,
+ * days of the week the class is held, and if the user (student) was present
  */
 public class Course implements Serializable{
     public static final String TAG = "ELCApp.webb.jerry.elc_roll_call.tag";

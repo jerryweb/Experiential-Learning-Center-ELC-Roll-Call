@@ -23,6 +23,7 @@
 		15B2FB201CBB6FA800159EA3 /* AddNewClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B2FB1F1CBB6FA800159EA3 /* AddNewClassViewController.m */; };
 		15B88F901C87A68700AA2563 /* ClassTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */; };
 		15B88F931C89080C00AA2563 /* AttendanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */; };
+		15C741431CBCEF60003DA534 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C741421CBCEF60003DA534 /* Student.m */; };
 		18051AF6B024AF1680D00252 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 342A6E3C04EA7D8925AD241B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		15B88F8F1C87A68700AA2563 /* ClassTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClassTableViewCell.m; path = ../ClassTableViewCell.m; sourceTree = "<group>"; };
 		15B88F911C89080C00AA2563 /* AttendanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendanceTableViewCell.h; sourceTree = "<group>"; };
 		15B88F921C89080C00AA2563 /* AttendanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendanceTableViewCell.m; sourceTree = "<group>"; };
+		15C741411CBCEF60003DA534 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		15C741421CBCEF60003DA534 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		342A6E3C04EA7D8925AD241B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4284E1F7CC04D0A19928E63C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D596414BE2FBC9A553F3360E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,7 +152,6 @@
 		15AE0E011C810A250015E1C8 = {
 			isa = PBXGroup;
 			children = (
-				15B2FB161CB75F7200159EA3 /* Model */,
 				15AE0E0C1C810A250015E1C8 /* RollCall */,
 				15AE0E261C810A250015E1C8 /* RollCallTests */,
 				15AE0E311C810A250015E1C8 /* RollCallUITests */,
@@ -176,6 +178,7 @@
 				15AE0E111C810A250015E1C8 /* AppDelegate.m */,
 				15155CC01C9F661800B80C1C /* RollCallNavigationController.h */,
 				15155CC11C9F661800B80C1C /* RollCallNavigationController.m */,
+				15B2FB161CB75F7200159EA3 /* Model */,
 				15155CBC1C9F653000B80C1C /* Table View Cells */,
 				157B86A11C8500780012755C /* Login / Signup Views */,
 				157B86A31C8500A20012755C /* Student Views */,
@@ -216,10 +219,13 @@
 		15B2FB161CB75F7200159EA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				15C741411CBCEF60003DA534 /* Student.h */,
+				15C741421CBCEF60003DA534 /* Student.m */,
 				15B2FB131CB75F6100159EA3 /* ClassSession.h */,
 				15B2FB141CB75F6100159EA3 /* ClassSession.m */,
 			);
 			name = Model;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		15B2FB1A1CBB6A7700159EA3 /* Admin Views */ = {
@@ -442,6 +448,7 @@
 				157B86A91C85017C0012755C /* StudentAttendanceHistoryViewController.m in Sources */,
 				157B86A61C8500CE0012755C /* StudentHomePageViewController.m in Sources */,
 				15AE0E421C810E850015E1C8 /* LoginViewController.m in Sources */,
+				15C741431CBCEF60003DA534 /* Student.m in Sources */,
 				15B88F931C89080C00AA2563 /* AttendanceTableViewCell.m in Sources */,
 				15B88F901C87A68700AA2563 /* ClassTableViewCell.m in Sources */,
 			);

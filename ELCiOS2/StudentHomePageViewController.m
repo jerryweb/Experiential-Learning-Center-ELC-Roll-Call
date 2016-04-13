@@ -17,7 +17,9 @@
 @interface StudentHomePageViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
+@property (strong, nonatomic) CLBeaconRegion *classRegion;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSUUID *classUUID;
 
 @end
 
@@ -26,12 +28,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.classUUID = [[NSUUID alloc] initWithUUIDString:@"07775DD0-111B-11E4-9191-0800200C9A66"];
+    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
+    [self.locationManager requestAlwaysAuthorization];
     
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"a500248c-abc2-4206-9bd7-034f4fc9ed10"];
-    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"com.Eric-Wang.RollCall"];
-    [self.locationManager startMonitoringForRegion:_beaconRegion];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"07775DD0-111B-11E4-9191-0800200C9A66"];
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                                major:6400
+                                                                minor:20130
+                                                           identifier:@"region"];
+
+    //[self.locationManager startMonitoringForRegion:_beaconRegion];
+    [self.locationManager startRangingBeaconsInRegion:_beaconRegion];
     
     // config table view
     _classesTable = [[UITableView alloc] initWithFrame:CGRectMake(35, 45, 305, 500)];
@@ -39,10 +49,7 @@
     _classesTable.dataSource = self;
     _classesTable.backgroundColor = [UIColor clearColor];
     _classesTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _classesTable.hidden = YES;
     [self.view addSubview:_classesTable];
-    
-    [self performSelector:@selector(showTable) withObject:self afterDelay:5.0];
     
     NSLog(@"view loaded");
 }
@@ -50,7 +57,7 @@
 #pragma mark - UITableView Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-        return 1;
+        return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -93,6 +100,7 @@
 #pragma mark - iBeacon Helper Methods 
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    NSLog(@"entered region");
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
 }
 
@@ -102,16 +110,22 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager
-        didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons
-               inRegion:(nonnull CLBeaconRegion *)region {
+        didRangeBeacons:(NSArray *)beacons
+               inRegion:(CLBeaconRegion *)region
+{
     NSLog(@"beacon found!");
     CLBeacon *foundBeacon = [beacons firstObject];
+    /*if([[foundBeacon.proximityUUID UUIDString] isEqualToString:[self.classUUID UUIDString]]) {
+        NSLog(@"check me in!");
+    } */
 }
 
-#pragma mark - Table Selector
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
+    NSLog(@"Failed monitoring region: %@", error);
+}
 
-- (void)showTable {
-    self.classesTable.hidden = NO;
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"Location manager failed: %@", error);
 }
 
 @end

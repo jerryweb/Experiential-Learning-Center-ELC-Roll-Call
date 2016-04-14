@@ -15,6 +15,8 @@ static NSString * const kCellIDStudent = @"StudentClass";
 @property (nonatomic,strong) UILabel *className;
 @property (nonatomic,strong) UILabel *instructorName;
 @property (nonatomic,strong) UILabel *timeLabel;
+@property (nonatomic,strong) UILabel *dateLabel;
+@property (nonatomic,strong) UILabel *ELCRoomLabel;
 @property (nonatomic,strong) UIImageView *attendanceStatus;
 
 @end

@@ -18,7 +18,7 @@
         
     self.backgroundColor = [UIColor clearColor];
         
-    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 305, 87)];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 305, 125)];
     backgroundView.backgroundColor = [UIColor colorWithRed:151.0 green:151.0 blue:151.0 alpha:.3];
     backgroundView.layer.cornerRadius = 5;
     backgroundView.layer.masksToBounds = YES;
@@ -30,7 +30,7 @@
     _className.font = [UIFont fontWithName:@"HelveticaNeue" size:22];
     [self addSubview:_className];
         
-    _instructorName = [[UILabel alloc] initWithFrame:CGRectMake(12, 42, 130, 15)];
+    _instructorName = [[UILabel alloc] initWithFrame:CGRectMake(12, 42, 200, 15)];
     _instructorName.textColor = [UIColor whiteColor];
     _instructorName.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
     [self addSubview:_instructorName];
@@ -40,7 +40,17 @@
     _timeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
     [self addSubview:_timeLabel];
         
-    _attendanceStatus = [[UIImageView alloc] initWithFrame:CGRectMake(261, 28, 32, 32)];
+    _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 80, 100, 15)];
+    _dateLabel.textColor = [UIColor whiteColor];
+    _dateLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
+    [self addSubview:_dateLabel];
+        
+    _ELCRoomLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 99, 100, 15)];
+    _ELCRoomLabel.textColor = [UIColor whiteColor];
+    _ELCRoomLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
+    [self addSubview:_ELCRoomLabel];
+        
+    _attendanceStatus = [[UIImageView alloc] initWithFrame:CGRectMake(261, 47, 32, 32)];
     UIImage *attendanceMark = [UIImage imageNamed:@"Present"];
     [_attendanceStatus setImage:attendanceMark];
     [self addSubview:_attendanceStatus];

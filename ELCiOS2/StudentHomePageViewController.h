@@ -10,7 +10,8 @@
 
 @interface StudentHomePageViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) UISegmentedControl *attendanceFilesPicker;
+@property (nonatomic,strong) UILabel *attendanceHistory;
 @property (nonatomic,strong) UITableView *classesTable;
+@property (nonatomic,strong) NSMutableArray *classesArray;
 
 @end

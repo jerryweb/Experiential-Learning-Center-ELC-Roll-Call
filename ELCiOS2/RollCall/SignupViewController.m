@@ -135,6 +135,10 @@
     [self.view addSubview:dividerThree];
     [self.view addSubview:dividerFour];
     [self.view addSubview:dividerFive];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)cancelSignup:(UIButton *)sender {
@@ -154,15 +158,19 @@
             } else {
                 NSString *uid = [result objectForKey:@"uid"];
                 NSLog(@"successfully created a user with uid: %@",uid);
+                StudentHomePageViewController *svc = [[StudentHomePageViewController alloc] init];
+                [self.navigationController pushViewController:svc animated:NO];
             }
         }];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Invalid Fields" message:@"Please Try Again" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:alertAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
-    
-    
-    
-    StudentHomePageViewController *svc = [[StudentHomePageViewController alloc] init];
-    [self.navigationController pushViewController:svc animated:NO];
 }
+
+#pragma mark - textfield delegate methods 
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [textField setText:@""];
@@ -172,6 +180,17 @@
     } else if(textField == _confirmPasswordField) {
         _confirmPasswordField.secureTextEntry = YES;
     }
+}
+
+- (BOOL) textFieldShouldReturn: (UITextField *) textField {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    return YES;
+}
+
+#pragma mark - dismiss keyboard
+
+- (void)dismissKeyboard {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 @end

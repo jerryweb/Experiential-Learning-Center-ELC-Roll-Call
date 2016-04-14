@@ -7,12 +7,14 @@
 //
 
 #import "ForgotPasswordViewController.h"
+#import <Firebase/Firebase.h>
 
 @interface ForgotPasswordViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) UITextField *emailTextField;
 @property (nonatomic,strong) UIButton *submitButton;
 @property (nonatomic,strong) UIButton *cancelButton;
+@property (nonatomic,strong) Firebase *myRootRef;
 
 @end
 
@@ -20,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _myRootRef = [[Firebase alloc] initWithUrl:@"https://rollcall-401.firebaseio.com/"];
     
     _emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(79, 203, 218, 30)];
     _emailTextField.text = @"Email Address";
@@ -52,25 +56,52 @@
     [self.view addSubview:_emailTextField];
     [self.view addSubview:_submitButton];
     [self.view addSubview:_cancelButton];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 #pragma mark - button selectors 
 
 - (void)submit:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:NO];
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Email Sent" message:@"Check Email for Further Instructions" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:alertAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    NSString *email = _emailTextField.text;
+    [_myRootRef resetPasswordForUser:email withCompletionBlock:^(NSError *error) {
+        if (error) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Invalid Email" message:@"Please Try Again" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:alertAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Email Sent" message:@"Check Email for Further Instructions" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:alertAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)cancel:(UIButton *)sender {
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+#pragma makr - textfield delegate methods
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [textField setText:@""];
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
+}
+
+- (BOOL) textFieldShouldReturn: (UITextField *) textField {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    return YES;
+}
+
+#pragma mark - dismiss keyboard
+
+- (void)dismissKeyboard {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 @end

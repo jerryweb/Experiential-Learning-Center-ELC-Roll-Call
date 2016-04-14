@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddNewClassViewController.h"
 
-@interface AdminHomePageViewController : UIViewController
+@interface AdminHomePageViewController : UIViewController 
+
+@property (nonatomic,strong) NSMutableArray *classesArray;
 
 @end

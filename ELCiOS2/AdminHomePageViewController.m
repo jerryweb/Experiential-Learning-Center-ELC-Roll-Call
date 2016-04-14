@@ -7,8 +7,8 @@
 //
 
 #import "AdminHomePageViewController.h"
-#import "AddNewClassViewController.h"
 #import "ClassTableViewCell.h"
+#import "ClassSession.h"
 
 @interface AdminHomePageViewController ()
 
@@ -21,6 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _classesArray = [[NSMutableArray alloc] init];
+    
+    ClassSession *c1 = [[ClassSession alloc] initWithClassName:@"CS401" withInstructorName:@"Professor Jeffrey Miller" withStartTime:@"2 pm" withEndTime:@"4 pm" withDate:@"4/13/16" withELCRoom:@"A6"];
+    ClassSession *c2 = [[ClassSession alloc] initWithClassName:@"BUAD304" withInstructorName:@"Professor Judy Tolan" withStartTime:@"10 am" withEndTime:@"12 pm" withDate:@"4/10/16" withELCRoom:@"B4"];
+    ClassSession *c3 = [[ClassSession alloc] initWithClassName:@"BUAD302" withInstructorName:@"Professor James Owens" withStartTime:@"4 pm" withEndTime:@"6 pm" withDate:@"3/3/16" withELCRoom:@"C2"];
+    [_classesArray addObject:c1];
+    [_classesArray addObject:c2];
+    [_classesArray addObject:c3];
     
     _addNewClassButton = [[UIButton alloc] initWithFrame:CGRectMake(38, 45, 300, 30)];
     [_addNewClassButton setTitle:@"Add New Class" forState:UIControlStateNormal];
@@ -48,12 +57,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return [_classesArray count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 101;
+    return 139;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -72,9 +81,13 @@
         cell = [[ClassTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    cell.className.text = @"CSCI401";
-    cell.instructorName.text = @"Professor Jeffrey Miller";
-    cell.timeLabel.text = @"MW 10-12 pm";
+    ClassSession *classAtRow = [_classesArray objectAtIndex:indexPath.row];
+    
+    cell.className.text = classAtRow.className;
+    cell.instructorName.text = classAtRow.instructorName;
+    cell.timeLabel.text = [[classAtRow.startTime stringByAppendingString:@" - "] stringByAppendingString:classAtRow.endTime];
+    //cell.dateLabel.text = classAtRow.date;
+    cell.ELCRoomLabel.text = classAtRow.ELCRoom;
     return cell;
 }
 

@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     
     _myRootRef = [[Firebase alloc] initWithUrl:@"https://rollcall-401.firebaseio.com/"];
     
@@ -60,7 +61,6 @@
     _passwordField.delegate = self;
     _passwordField.tintColor = [UIColor clearColor];
     _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    //_passwordField.secureTextEntry = YES;
 
     // config forgot password button
     _forgotPasswordButton = [[UIButton alloc]initWithFrame:CGRectMake(79, 295, 130, 15)];
@@ -95,7 +95,13 @@
     [self.view addSubview:_forgotPasswordButton];
     [self.view addSubview:_loginButton];
     [self.view addSubview:_registerButton];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
+
+#pragma mark - button selectors
 
 - (void)newUserRegister:(UIButton *)sender {
     SignupViewController *svc = [[SignupViewController alloc] init];
@@ -113,15 +119,23 @@
     
     [_myRootRef authUser:email password:password withCompletionBlock:^(NSError *error, FAuthData *authData) {
         if (error) {
-            NSLog(@"there was an error");
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Incorrect Email or Password" message:@"Please Try Again" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:alertAction];
+            [self presentViewController:alertController animated:YES completion:nil];
         } else {
-            StudentHomePageViewController *ivc = [[StudentHomePageViewController alloc] init];
-            [self.navigationController pushViewController:ivc animated:NO];
-            //AdminHomePageViewController *avc = [[AdminHomePageViewController alloc] init];
-            //[self.navigationController pushViewController:avc animated:NO];
+            if ([email isEqualToString:@"ericlwan@usc.edu"]) {
+                AdminHomePageViewController *avc = [[AdminHomePageViewController alloc] init];
+                [self.navigationController pushViewController:avc animated:NO];
+            } else {
+                StudentHomePageViewController *ivc = [[StudentHomePageViewController alloc] init];
+                [self.navigationController pushViewController:ivc animated:NO];
+            }
         }
     }];
 }
+
+#pragma mark - UITextField Delegate Method 
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [textField setText:@""];
@@ -129,6 +143,17 @@
     if(textField == _passwordField) {
         _passwordField.secureTextEntry = YES;
     }
+}
+
+- (BOOL) textFieldShouldReturn: (UITextField *) textField {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    return YES;
+}
+
+#pragma mark - dismiss keyboard
+
+- (void)dismissKeyboard {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 @end

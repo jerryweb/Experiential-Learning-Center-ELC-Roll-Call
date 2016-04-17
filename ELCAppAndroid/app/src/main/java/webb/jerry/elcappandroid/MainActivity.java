@@ -21,10 +21,12 @@ import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import webb.jerry.elcappandroid.Model.Beacon;
@@ -34,6 +36,7 @@ import static webb.jerry.elcappandroid.R.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = "elc.webb.jerry.tag";
+    private static final int DISCOVERY_REQUEST = 1;
 
     View viewLogin;
     EditText textEmailAddress;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button forgotPasswordButton;
     Button loginButton;
     Button registerButton;
-    BluetoothAdapter bluetoothAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
     Set<BluetoothDevice> deviceSet;
     ArrayList<String> deviceNames;
 
@@ -59,28 +62,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonBack;
     Integer userType;
     IntentFilter filter;
-    BroadcastReceiver receiver;
+
+    // Create the bluetooth receiver at the beginning of the activity
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
         Firebase.setAndroidContext(this);
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         init();
 
-        if(bluetoothAdapter == null){
+        if(mBluetoothAdapter == null){
             Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
             finish();
         }
         else{
-            if(!bluetoothAdapter.isEnabled()){
+            if(!mBluetoothAdapter.isEnabled()){
                 turnOnBluetooth();
             }
             else{
-                startDiscovery();
-                getDevices();
+                mBluetoothAdapter.startDiscovery();
             }
         }
 
@@ -88,19 +92,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void startDiscovery(){
-        bluetoothAdapter.cancelDiscovery();
-        bluetoothAdapter.startDiscovery();
-    }
-
-    private void init(){
+    private void init() {
         viewLogin = (View) findViewById(id.viewLogin);
         viewLogin.setVisibility(View.VISIBLE);
         textEmailAddress = (EditText) findViewById(R.id.editTextEmail);
         textPassword = (EditText) findViewById(R.id.passwordEditText);
         forgotPasswordButton = (Button) findViewById(R.id.forgotPasswordButton);
         loginButton = (Button) findViewById(R.id.loginButton);
-        registerButton =(Button) findViewById(R.id.registerButton);
+        registerButton = (Button) findViewById(R.id.registerButton);
 
         forgotPasswordButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
@@ -138,173 +137,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // This handles finding new bluetooth devices within range
         // Filter just devices that are newly found
-        deviceSet = new Set<BluetoothDevice>() {
-            @Override
-            public boolean add(BluetoothDevice object) {
-                return false;
-            }
+        IntentFilter filter = new IntentFilter();
 
-            @Override
-            public boolean addAll(Collection<? extends BluetoothDevice> collection) {
-                return false;
-            }
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_FOUND);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public boolean contains(Object object) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<BluetoothDevice> iterator() {
-                return null;
-            }
-
-            @Override
-            public boolean remove(Object object) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @NonNull
-            @Override
-            public <T> T[] toArray(T[] array) {
-                return null;
-            }
-        };
-
-
-        filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if(BluetoothDevice.ACTION_FOUND.equals(action)){
-                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//                    for(BluetoothDevice d: deviceSet){
-//                        if()
-//                    }
-                    Log.d("bluetooth", "device added: ");
-
-                    for(String name: deviceNames){
-                        if(name != device.getName()){
-                            deviceSet.add(device);
-                            deviceNames.add(device.getName());
-                            Log.d("bluetooth", "device added");
-                        }
-                    }
-
-//                    deviceSet.add(device);
-//                    deviceNames.add(device.getName());
-                }
-                else if(BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)){
-
-                }
-                else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
-
-                }
-                else if(BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)){
-                    if(bluetoothAdapter.getState() == bluetoothAdapter.STATE_OFF){
-                        turnOnBluetooth();
-                    }
-                }
-            }
-
-        };
-        registerReceiver(receiver, filter);
-        filter =  new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        registerReceiver(receiver, filter);
-        filter =  new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-        registerReceiver(receiver, filter);
-        filter =  new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        registerReceiver(receiver, filter);
-
+        registerReceiver(mReceiver, filter);
+        mBluetoothAdapter.startDiscovery();
     }
 
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+
+                if (state == BluetoothAdapter.STATE_ON) {
+                    Toast.makeText(getApplicationContext(),"Enabled",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                //discovery starts, we can show progress dialog or perform other tasks
+                Toast.makeText(getApplicationContext(),"started",Toast.LENGTH_SHORT).show();
+
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                //discovery finishes, dismis progress dialog
+                Toast.makeText(getApplicationContext(),"done",Toast.LENGTH_SHORT).show();
+
+            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                //bluetooth device found
+                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                String name = device.getName();
+//                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_SHORT).show();
+
+//                BluetoothDevice d = new BluetoothDevice("X",);
+                boolean foundBeacon = BeaconSingleton.get(getApplicationContext()).searchBeacon(device.getName(),device.getAddress());
+                if(foundBeacon){
+                    Toast.makeText(getApplicationContext(),"we can now log in!",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+    };
+
     private void turnOnBluetooth(){
-        Intent btIntent = new Intent(bluetoothAdapter.ACTION_REQUEST_ENABLE);
+        Intent btIntent = new Intent(mBluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(btIntent, 1);
     }
 
-    private void getDevices(){
-//        deviceSet = bluetoothAdapter.getBondedDevices();
-//        if(!deviceSet.isEmpty()){
-            ArrayList<Beacon> beacons = BeaconSingleton.get(getApplicationContext()).getMBeacons();
-//            for(BluetoothDevice device: deviceSet){
 
-                for(String name: deviceNames){
-//                Toast.makeText(getApplicationContext(), device.getName() + "\n" + device.getAddress(), Toast.LENGTH_SHORT).show();
-//                try {
-//                    wait(300);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-                    Log.d("device name: ", name);
-                    for(Beacon beacon: beacons){
-                        if(name == beacon.getBeaconName()){
-                            foundBeacon();
-                        }
-                        break;
-                    }
-                    Toast.makeText(getApplicationContext(), "Done searching", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onPause() {
+        if (mBluetoothAdapter != null) {
+            if (mBluetoothAdapter.isDiscovering()) {
+                mBluetoothAdapter.cancelDiscovery();
             }
-//        }
-//        Toast.makeText(getApplicationContext(), "Done searching", Toast.LENGTH_SHORT).show();
-        Log.d("device", "no devices");
+        }
 
-
-    }
-
-    private void foundBeacon(){
-        Toast.makeText(getApplicationContext(), "Beacon found", Toast.LENGTH_SHORT).show();
-
-    }
-
-    // This is used for
-    private void addClass(){
-
+        super.onPause();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(receiver);
+    public void onDestroy() {
+        unregisterReceiver(mReceiver);
+
+        super.onDestroy();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -312,6 +215,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(resultCode == RESULT_CANCELED){
             Toast.makeText(getApplicationContext(),"Bluetooth must be enabled to continue", Toast.LENGTH_SHORT).show();
             finish();
+        }
+        else if(resultCode == DISCOVERY_REQUEST){
+            Toast.makeText(getApplicationContext(), "Discovery in progress", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -351,13 +257,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onAuthenticationError(FirebaseError firebaseError) {
                                 Toast.makeText(getApplicationContext(),
-                                       firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                        firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                             }
 
 
                         });
-                getDevices();
-//                }
+                    mBluetoothAdapter.cancelDiscovery();
+                    mBluetoothAdapter.startDiscovery();
+    //                }
                 break;
 
             case R.id.registerButton:

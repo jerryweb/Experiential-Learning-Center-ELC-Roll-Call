@@ -1,8 +1,10 @@
 package webb.jerry.elcappandroid.Model;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by LJ on 4/10/16.
@@ -17,7 +19,7 @@ public class BeaconSingleton {
     private BeaconSingleton(Context c){
         this.mAppContext = c;
         mBeacons = new ArrayList<Beacon>();
-        Beacon beacon = new Beacon("XY-8EC4-64", "00.EA:23:33:8E:C4", "", "");
+        Beacon beacon = new Beacon("XY-8EC4-64", "", "", "","00:EA:23:33:8E:C4");
         mBeacons.add(beacon);
     }
 
@@ -34,6 +36,16 @@ public class BeaconSingleton {
 
     public void addBeacon(Beacon b) {
         mBeacons.add(b);
+    }
+
+    public boolean searchBeacon(String name, String address){
+        for(Beacon b: mBeacons) {
+            if (Objects.equals(b.getBeaconName(), name) || Objects.equals(b.getAddress(), address)) {
+                Toast.makeText(mAppContext, "found!", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+            return false;
     }
 
     public void removeBeacon(Beacon b){

@@ -15,14 +15,22 @@ import android.widget.Toast;
 
 
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+<<<<<<< Updated upstream
 import webb.jerry.elcappandroid.Model.BluetoothSingleton;
+=======
+import webb.jerry.elcappandroid.Model.Beacon;
+import webb.jerry.elcappandroid.Model.BeaconSingleton;
+import webb.jerry.elcappandroid.Model.User;
+>>>>>>> Stashed changes
 
 import static webb.jerry.elcappandroid.R.*;
 
@@ -312,6 +320,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Log.d(TAG, editTextNewPassword.getText().toString());
                                 Toast.makeText(getApplicationContext(),
                                         "User created!", Toast.LENGTH_LONG).show();
+                                final User user = new User();
+                                user.setEmail(editTextNewEmail.getText().toString());
+                                user.setFirstName(editTextfirstName.getText().toString());
+                                user.setFirstName(editTextLastName.getText().toString());
+                                user.setUniversityId(Integer.parseInt(editTextUniversityId.getText().toString()));
+
+                                String encodedEmail = editTextNewEmail.getText().toString()
+                                        .replace(".", ",");
+                                final Firebase userLocation = new Firebase(getResources().getString(string.Firebase_url))
+                                        .child(encodedEmail);
+                                userLocation.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.getValue() == null) {
+                                            userLocation.setValue(user);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(FirebaseError firebaseError) {
+
+                                    }
+                                });
                             }
 
                             @Override

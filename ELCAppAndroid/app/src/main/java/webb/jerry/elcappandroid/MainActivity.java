@@ -24,13 +24,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-<<<<<<< Updated upstream
+
 import webb.jerry.elcappandroid.Model.BluetoothSingleton;
-=======
+
 import webb.jerry.elcappandroid.Model.Beacon;
 import webb.jerry.elcappandroid.Model.BeaconSingleton;
 import webb.jerry.elcappandroid.Model.User;
->>>>>>> Stashed changes
+
 
 import static webb.jerry.elcappandroid.R.*;
 

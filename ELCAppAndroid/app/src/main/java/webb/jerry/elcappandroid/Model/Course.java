@@ -10,19 +10,20 @@ import java.io.Serializable;
 public class Course implements Serializable{
     public static final String TAG = "ELCApp.webb.jerry.elc_roll_call.tag";
 
-    private String className, instructorName, dates;
+    private String className, instructorName, dates, beaconAddress;
     private boolean studentPresent;
 
     public Course(){
         super();
     }
 
-    public Course(String cN, String iN, String date){
+    public Course(String cN, String iN, String date, String bA){
         super();
         this.className = cN;
         this.instructorName = iN;
         this.dates = date;
         this.studentPresent = false;
+        this.beaconAddress = bA;
     }
 
     public boolean isStudentPresent() {
@@ -56,4 +57,6 @@ public class Course implements Serializable{
     public void setDates(String dates) {
         this.dates = dates;
     }
+
+
 }

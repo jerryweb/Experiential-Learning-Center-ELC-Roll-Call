@@ -18,6 +18,7 @@ public class CourseSingleton {
         this.mAppContext = c;
     }
 
+
     public static CourseSingleton get(Context c) {
         if (sCourseSingleton == null) {
             sCourseSingleton = new CourseSingleton(c.getApplicationContext());

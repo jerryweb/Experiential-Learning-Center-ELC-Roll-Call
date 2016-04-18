@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBluetoothAdapter.startDiscovery();
     }
 
+//    search for beacon and send a toast when found
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -173,8 +174,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String name = device.getName();
 //                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_SHORT).show();
-
-//                BluetoothDevice d = new BluetoothDevice("X",);
                 boolean foundBeacon = BeaconSingleton.get(getApplicationContext()).searchBeacon(device.getName(),device.getAddress());
                 if(foundBeacon){
                     Toast.makeText(getApplicationContext(),"we can now log in!",Toast.LENGTH_SHORT).show();

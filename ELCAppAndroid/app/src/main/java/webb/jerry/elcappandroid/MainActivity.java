@@ -31,6 +31,7 @@ import java.util.Set;
 
 import webb.jerry.elcappandroid.Model.Beacon;
 import webb.jerry.elcappandroid.Model.BeaconSingleton;
+import webb.jerry.elcappandroid.Model.bluetoothSingleton;
 
 import static webb.jerry.elcappandroid.R.*;
 
@@ -75,18 +76,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-        if(mBluetoothAdapter == null){
-            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
-            finish();
+        if(!bluetoothSingleton.get(this).initBluetooth()){
+            turnOnBluetooth();
         }
-        else{
-            if(!mBluetoothAdapter.isEnabled()){
-                turnOnBluetooth();
-            }
-            else{
-                mBluetoothAdapter.startDiscovery();
-            }
-        }
+
+        bluetoothSingleton.get(this).searchForBeacon();
+//        if(mBluetoothAdapter == null){
+//            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//        else{
+//            if(!mBluetoothAdapter.isEnabled()){
+//                turnOnBluetooth();
+//            }
+//            else{
+//                mBluetoothAdapter.startDiscovery();
+//            }
+//        }
 
 
     }
@@ -137,73 +143,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // This handles finding new bluetooth devices within range
         // Filter just devices that are newly found
-        IntentFilter filter = new IntentFilter();
-
-        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-
-        registerReceiver(mReceiver, filter);
-        mBluetoothAdapter.startDiscovery();
+//        IntentFilter filter = new IntentFilter();
+//
+//        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+//        filter.addAction(BluetoothDevice.ACTION_FOUND);
+//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+//
+//        registerReceiver(mReceiver, filter);
+//        mBluetoothAdapter.startDiscovery();
     }
 
 //    search for beacon and send a toast when found
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-
-                if (state == BluetoothAdapter.STATE_ON) {
-                    Toast.makeText(getApplicationContext(),"Enabled",Toast.LENGTH_SHORT).show();
-                }
-            }
-            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                //discovery starts, we can show progress dialog or perform other tasks
-                Toast.makeText(getApplicationContext(),"started",Toast.LENGTH_SHORT).show();
-
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                //discovery finishes, dismis progress dialog
-                Toast.makeText(getApplicationContext(),"done",Toast.LENGTH_SHORT).show();
-
-            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                //bluetooth device found
-                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String name = device.getName();
-//                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_SHORT).show();
-                boolean foundBeacon = BeaconSingleton.get(getApplicationContext()).searchBeacon(device.getName(),device.getAddress());
-                if(foundBeacon){
-                    Toast.makeText(getApplicationContext(),"we can now log in!",Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }
-    };
+//    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//
+//            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+//                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+//
+//                if (state == BluetoothAdapter.STATE_ON) {
+//                    Toast.makeText(getApplicationContext(),"Enabled",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+//                //discovery starts, we can show progress dialog or perform other tasks
+//                Toast.makeText(getApplicationContext(),"started",Toast.LENGTH_SHORT).show();
+//
+//            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+//                //discovery finishes, dismis progress dialog
+//                Toast.makeText(getApplicationContext(),"done",Toast.LENGTH_SHORT).show();
+//
+//            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                //bluetooth device found
+//                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                String name = device.getName();
+////                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_SHORT).show();
+//                boolean foundBeacon = BeaconSingleton.get(getApplicationContext()).searchBeacon(device.getName(),device.getAddress());
+//                if(foundBeacon){
+//                    Toast.makeText(getApplicationContext(),"we can now log in!",Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        }
+//    };
 
     private void turnOnBluetooth(){
-        Intent btIntent = new Intent(mBluetoothAdapter.ACTION_REQUEST_ENABLE);
+        Intent btIntent = new Intent(bluetoothSingleton.get(this).mBluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(btIntent, 1);
     }
 
 
     @Override
     public void onPause() {
-        if (mBluetoothAdapter != null) {
-            if (mBluetoothAdapter.isDiscovering()) {
-                mBluetoothAdapter.cancelDiscovery();
-            }
-        }
-
+//        if (mBluetoothAdapter != null) {
+//            if (mBluetoothAdapter.isDiscovering()) {
+//                mBluetoothAdapter.cancelDiscovery();
+//            }
+//        }
+        bluetoothSingleton.get(this).toggleDiscovery();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(mReceiver);
-
+        bluetoothSingleton.get(this).unregisterReceiver();
         super.onDestroy();
     }
 

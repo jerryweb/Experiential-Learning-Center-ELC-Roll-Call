@@ -13,13 +13,13 @@
         android:layout_height="fill_parent"
         android:orientation="horizontal"
         android:id="@+id/radioGroupContentSelection"
-        android:layout_weight=".9">
+        android:layout_weight=".45">
         <RadioButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/attendance"
             android:id="@+id/radioButtonAttendance"
-            android:layout_weight=".5"
+            android:layout_weight=".4"
             android:checked="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium_size" />
@@ -29,26 +29,37 @@
             android:layout_height="fill_parent"
             android:text="@string/uploaded_files"
             android:id="@+id/radioButtonUploadedFiles"
-            android:layout_weight=".5"
+            android:layout_weight=".4"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium_size" />
 
     </RadioGroup>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="Scan for Beacon"
+        android:id="@+id/scanForBeaconButton"
+        android:layout_weight=".45"
+        android:background="@color/teal"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center_horizontal"
-        android:layout_weight=".1"
-        android:id="@+id/layoutAttendance">
+        android:id="@+id/layoutAttendance"
+        android:layout_weight=".1">
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:id="@+id/listViewStudntClassAttendance"
             android:layout_gravity="center_horizontal"
             android:nestedScrollingEnabled="true" />
+
+
     </LinearLayout>
 
 

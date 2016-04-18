@@ -34,7 +34,7 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Go to seperate create course activity
             }
         });
 

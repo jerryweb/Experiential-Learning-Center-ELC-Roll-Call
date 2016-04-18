@@ -2,12 +2,15 @@ package webb.jerry.elcappandroid;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
 import webb.jerry.elcappandroid.Model.Course;
+import webb.jerry.elcappandroid.Model.bluetoothSingleton;
 import webb.jerry.elcappandroid.View.CourseAdapter;
 
 /**
@@ -29,6 +32,7 @@ public class StudentClassManagementActivity extends AppCompatActivity {
     RadioGroup radioGroupContentSelection;
     ListView listViewStudntClassAttendance;
     CourseAdapter courseAdapter;
+    Button scanForBeaconButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,15 @@ public class StudentClassManagementActivity extends AppCompatActivity {
         listViewStudntClassAttendance = (ListView) findViewById(R.id.listViewStudntClassAttendance);
         courseAdapter = new CourseAdapter(this, studentCourses);
 //        listViewStudntClassAttendance.setAdapter(courseAdapter);
+        scanForBeaconButton = (Button) findViewById(R.id.scanForBeaconButton);
+
+        // this allows the student to manually search for the beacon
+        scanForBeaconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bluetoothSingleton.get(getApplicationContext()).searchForBeacon();
+            }
+        });
 
     }
 

@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 import java.util.ArrayList;
 
 import webb.jerry.elcappandroid.Model.Course;
-import webb.jerry.elcappandroid.Model.bluetoothSingleton;
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.View.CourseAdapter;
 
 /**
@@ -49,9 +49,11 @@ public class StudentClassManagementActivity extends AppCompatActivity {
         scanForBeaconButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bluetoothSingleton.get(getApplicationContext()).searchForBeacon();
+                BluetoothSingleton.get(getApplicationContext()).toggleBeaconSearch();
             }
         });
+
+
 
     }
 

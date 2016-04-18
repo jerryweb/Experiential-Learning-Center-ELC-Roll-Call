@@ -38,7 +38,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="Scan for Beacon"
+        android:text="Toggle Scan"
         android:id="@+id/scanForBeaconButton"
         android:layout_weight=".45"
         android:background="@color/teal"

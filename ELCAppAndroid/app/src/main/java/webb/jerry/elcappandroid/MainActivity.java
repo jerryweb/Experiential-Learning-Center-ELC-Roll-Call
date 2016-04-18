@@ -2,11 +2,8 @@ package webb.jerry.elcappandroid;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,17 +18,11 @@ import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
-import webb.jerry.elcappandroid.Model.Beacon;
-import webb.jerry.elcappandroid.Model.BeaconSingleton;
-import webb.jerry.elcappandroid.Model.bluetoothSingleton;
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 
 import static webb.jerry.elcappandroid.R.*;
 
@@ -76,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-        if(!bluetoothSingleton.get(this).initBluetooth()){
+        if(!BluetoothSingleton.get(this).initBluetooth()){
             turnOnBluetooth();
         }
 
-        bluetoothSingleton.get(this).searchForBeacon();
+        BluetoothSingleton.get(this).toggleBeaconSearch();
 //        if(mBluetoothAdapter == null){
 //            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
 //            finish();
@@ -190,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    };
 
     private void turnOnBluetooth(){
-        Intent btIntent = new Intent(bluetoothSingleton.get(this).mBluetoothAdapter.ACTION_REQUEST_ENABLE);
+        Intent btIntent = new Intent(BluetoothSingleton.get(this).mBluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(btIntent, 1);
     }
 
@@ -202,13 +193,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                mBluetoothAdapter.cancelDiscovery();
 //            }
 //        }
-        bluetoothSingleton.get(this).toggleDiscovery();
+        BluetoothSingleton.get(this).sBluetoothSingleton.stopDiscovery(BluetoothSingleton.get(this));
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        bluetoothSingleton.get(this).unregisterReceiver();
+        BluetoothSingleton.get(this).unregisterReceiver();
         super.onDestroy();
     }
 

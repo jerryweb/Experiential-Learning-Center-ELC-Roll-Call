@@ -14,21 +14,21 @@ import android.widget.Toast;
  * with one bluetooth instantiation. The main scanning and discovery methods
  * are located here.
  */
-public class bluetoothSingleton {
-    private static bluetoothSingleton sBluetoothSingleton;
+public class BluetoothSingleton {
+    public static BluetoothSingleton sBluetoothSingleton;
     private static final int DISCOVERY_REQUEST = 1;
     private Context mAppContext;
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;
 
-    private bluetoothSingleton(Context c){
+    private BluetoothSingleton(Context c){
         this.mAppContext = c;
         initBluetooth();
     }
 
-    public static bluetoothSingleton get(Context c) {
+    public static BluetoothSingleton get(Context c) {
         if(sBluetoothSingleton == null){
-            sBluetoothSingleton = new bluetoothSingleton(c.getApplicationContext());
+            sBluetoothSingleton = new BluetoothSingleton(c.getApplicationContext());
         }
         return sBluetoothSingleton;
     }
@@ -60,9 +60,13 @@ public class bluetoothSingleton {
     }
 
     // Look for other devices within range to see if it matches the beacons requested
-    public void searchForBeacon(){
-        mBluetoothAdapter.cancelDiscovery();
-        mBluetoothAdapter.startDiscovery();
+    public void toggleBeaconSearch(){
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
+        else if (!mBluetoothAdapter.isDiscovering()){
+            mBluetoothAdapter.startDiscovery();
+        }
     }
 
 
@@ -84,7 +88,8 @@ public class bluetoothSingleton {
 
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 //discovery finishes, dismis progress dialog
-                Toast.makeText(mAppContext,"done",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mAppContext,"reseting search",Toast.LENGTH_SHORT).show();
+                mBluetoothAdapter.startDiscovery();
 
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 //bluetooth device found
@@ -100,15 +105,15 @@ public class bluetoothSingleton {
         }
     };
 
-    public void toggleDiscovery(){
-        if (mBluetoothAdapter != null) {
-            if (mBluetoothAdapter.isDiscovering()) {
-                mBluetoothAdapter.cancelDiscovery();
-            }
-        }
-    }
-
     public void unregisterReceiver(){
         mAppContext.unregisterReceiver(this.mReceiver);
+    }
+
+    public void stopDiscovery(BluetoothSingleton bluetoothSingleton){
+        if (mBluetoothAdapter != null) {
+            if (mBluetoothAdapter.isDiscovering()) {
+               mBluetoothAdapter.cancelDiscovery();
+            }
+        }
     }
 }

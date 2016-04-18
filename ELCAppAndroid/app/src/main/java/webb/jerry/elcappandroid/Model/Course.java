@@ -1,6 +1,11 @@
 package webb.jerry.elcappandroid.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+
 
 /**
  * Created by LJ on 3/5/16.
@@ -10,29 +15,33 @@ import java.io.Serializable;
 public class Course implements Serializable{
     public static final String TAG = "ELCApp.webb.jerry.elc_roll_call.tag";
 
-    private String className, instructorName, dates, beaconAddress;
-    private boolean studentPresent;
-
+    private String className, instructorName, dates, beaconName;
+//    private ArrayList<Boolean> daysPresent;
+    private Map<Date, Boolean> daysPresent;
     public Course(){
         super();
     }
 
-    public Course(String cN, String iN, String date, String bA){
+    public Course(String cN, String iN, String date, String bA, String bN){
         super();
         this.className = cN;
         this.instructorName = iN;
         this.dates = date;
-        this.studentPresent = false;
-        this.beaconAddress = bA;
+        this.beaconName = bN;
     }
 
-    public boolean isStudentPresent() {
-        return studentPresent;
+    public Map<Date, Boolean> getDaysPresent() {
+        return daysPresent;
     }
 
-    public void setStudentPresent(boolean studentPresent) {
-        this.studentPresent = studentPresent;
+    public void setDaysPresent(Map<Date, Boolean> daysPresent) {
+        this.daysPresent = daysPresent;
     }
+
+    public void addCurrentDayPresent(Date d, boolean present){
+        daysPresent.put(d,present);
+    }
+
 
     public String getClassName() {
         return className;
@@ -58,5 +67,12 @@ public class Course implements Serializable{
         this.dates = dates;
     }
 
+    public String getBeaconName() {
+        return beaconName;
+    }
+
+    public void setBeaconName(String beaconName) {
+        this.beaconName = beaconName;
+    }
 
 }

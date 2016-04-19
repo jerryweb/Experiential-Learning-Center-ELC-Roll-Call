@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,8 @@ import static webb.jerry.elcappandroid.R.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = "elc.webb.jerry.tag";
+    public static final String PREF_EMAIL = "elc.rollcall.preferences.email";
+    private static final String PREF_FILENAME = "elc.rollcall.preferences.app_prefs";
     private static final int DISCOVERY_REQUEST = 1;
 
     View viewLogin;
@@ -200,6 +203,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
 
                                 }
+
+                                SharedPreferences prefs = getSharedPreferences(
+                                        PREF_FILENAME, MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = prefs.edit();
+
+                                editor.putString(PREF_EMAIL, textEmailAddress.getText().toString()
+                                        .replace(".", ","));
+
+                                editor.commit();
+
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
 
@@ -299,6 +313,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                     }
                                 });
+
+                                SharedPreferences prefs = getSharedPreferences(
+                                        PREF_FILENAME, MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = prefs.edit();
+
+                                editor.putString(PREF_EMAIL, encodedEmail);
+
+                                editor.commit();
                             }
 
                             @Override

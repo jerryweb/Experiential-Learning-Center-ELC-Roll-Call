@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/elc_background"
     android:weightSum="1">
 
     <LinearLayout
@@ -50,14 +49,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/checkBoxStudentPresent"
             android:layout_weight=".7"
-            android:visibility="invisible"
             android:checked="true" />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageView"
-            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

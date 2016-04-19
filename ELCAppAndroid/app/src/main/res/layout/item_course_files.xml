@@ -30,7 +30,6 @@
             android:text="Monday, Frebruary 24, 2106"
             android:id="@+id/button3"
             android:layout_gravity="center_horizontal"
-            android:textAlignment="textStart"
             android:background="#00ffffff"
             android:layout_weight=".1"
             android:textColor="@color/white" />
@@ -56,7 +55,6 @@
             android:text="Tuesday, Frebruary 24, 2106"
             android:id="@+id/button4"
             android:layout_gravity="center_horizontal"
-            android:textAlignment="textStart"
             android:background="#00ffffff"
             android:layout_weight=".1"
             android:textColor="@color/white" />

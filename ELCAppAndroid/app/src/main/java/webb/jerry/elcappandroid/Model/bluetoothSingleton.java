@@ -1,8 +1,5 @@
 package webb.jerry.elcappandroid.Model;
 
-/**
- * Created by LJ on 4/18/16.
- */
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;

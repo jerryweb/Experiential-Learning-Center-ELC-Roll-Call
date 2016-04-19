@@ -31,7 +31,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/viewLogin"
         android:layout_weight=".2"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <EditText
             android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center_horizontal"
         android:layout_weight=".2"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/viewRegister"
         android:weightSum="1">
 

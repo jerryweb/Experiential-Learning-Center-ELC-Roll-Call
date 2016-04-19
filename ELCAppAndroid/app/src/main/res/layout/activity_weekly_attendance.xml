@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/elc_background">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="57dp"
+        android:text="    BUAD 302"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/text_large_size"
+        android:gravity="center_vertical"
+        android:background="@color/teal"
+        android:textColor="@color/white"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#abffffff"
+        android:layout_marginTop="4dp" >
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Monday, Frebruary 24, 2106"
+            android:id="@+id/button2"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="textStart"
+            android:background="#00ffffff"
+            android:layout_weight=".1"
+            android:textColor="@color/white" />
+
+        <CheckBox
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/checkBox3"
+            android:layout_weight=".9" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#abffffff"
+        android:layout_marginTop="4dp" >
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Tuesday, Frebruary 24, 2106"
+            android:id="@+id/button5"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="textStart"
+            android:background="#00ffffff"
+            android:layout_weight=".1"
+            android:textColor="@color/white" />
+
+        <CheckBox
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/checkBox4"
+            android:layout_weight=".9"
+            android:enabled="false"
+            android:checked="true" />
+    </LinearLayout>
+</LinearLayout>

@@ -39,7 +39,7 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
                 // Go to seperate create course activity
                 Log.d("TAG", "I'm here");
                 Intent i = new Intent(getApplicationContext(),InstructorAdmitActivity.class);
-                startActivity(i);
+                startActivityForResult(i, 0);
 
             }
         });

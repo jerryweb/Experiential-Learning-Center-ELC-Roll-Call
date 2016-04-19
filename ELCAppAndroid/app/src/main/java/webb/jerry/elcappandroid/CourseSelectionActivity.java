@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
+import com.firebase.client.Firebase;
+
 import java.util.ArrayList;
 
 import webb.jerry.elcappandroid.Model.Course;
@@ -26,11 +28,6 @@ public class CourseSelectionActivity extends AppCompatActivity {
 
         CourseSingleton s = CourseSingleton.get(getApplicationContext());
         mListView = (ListView) findViewById(R.id.listViewStudentCourses);
-        Course myCourse = new Course();
-        myCourse.setClassName("BUAD 302");
-        myCourse.setInstructorName("Professor James Owens");
-        myCourse.setDates("MW 12-2");
-        s.addCourse(myCourse);
         mCourses = s.getMCourses();
         mAdapter = new CourseAdapter(
                 getApplicationContext(),

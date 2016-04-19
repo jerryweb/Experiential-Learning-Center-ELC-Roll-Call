@@ -22,7 +22,7 @@ public class Course implements Serializable{
         super();
     }
 
-    public Course(String cN, String iN, String date, String bA, String bN){
+    public Course(String cN, String iN, String date, String bN){
         super();
         this.className = cN;
         this.instructorName = iN;

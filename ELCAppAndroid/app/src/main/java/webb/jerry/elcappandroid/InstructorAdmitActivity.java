@@ -1,21 +1,29 @@
 package webb.jerry.elcappandroid;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import webb.jerry.elcappandroid.Model.Course;
+import webb.jerry.elcappandroid.Model.CourseSingleton;
+
 /**
  * Created by LJ on 4/18/16.
  */
 public class InstructorAdmitActivity extends AppCompatActivity implements View.OnClickListener {
     EditText courseNameEditText;
-    EditText beaconAddressEditText;
     EditText beaconNameEditText;
     EditText majorEditText;
     EditText instructorNameEditText;
-
+    EditText daysEditText;
     EditText instructorEmailEditText;
     EditText elcRoomEditText;
     EditText startTimeEditText;
@@ -31,11 +39,10 @@ public class InstructorAdmitActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_instructor_admin_page);
 
         courseNameEditText = (EditText) findViewById(R.id.courseNameEditText);
-        beaconAddressEditText = (EditText) findViewById(R.id.beaconAddressEditText);
         beaconNameEditText = (EditText) findViewById(R.id.beaconNameEditText);
         majorEditText = (EditText) findViewById(R.id.majorEditText);
         instructorNameEditText = (EditText) findViewById(R.id.instructorNameEditText);
-
+        daysEditText = (EditText) findViewById(R.id.daysEditText);
         instructorEmailEditText = (EditText) findViewById(R.id.instructorEmailEditText);
         elcRoomEditText = (EditText) findViewById(R.id.elcRoomEditText);
         startTimeEditText = (EditText) findViewById(R.id.startTimeEditText);
@@ -52,9 +59,41 @@ public class InstructorAdmitActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.submitButton:
+                final Course myCourse = new Course();
+                myCourse.setClassName(courseNameEditText.getText().toString());
+                myCourse.setInstructorName(instructorNameEditText.getText().toString());
+                myCourse.setBeaconName(beaconNameEditText.getText().toString());
+                myCourse.setDates(daysEditText.getText().toString() +
+                        " " + startTimeEditText.getText().toString()
+                        + "-" + endTimeEditText.getText().toString());
+                CourseSingleton s = CourseSingleton.get(getApplicationContext());
+                s.addCourse(myCourse);
+                String encodedCourse = courseNameEditText.getText().toString()
+                        + "-" + myCourse.getDates();
+
+                final Firebase userLocation = new Firebase(getResources().getString(R.string.Firebase_url))
+                        .child("Courses").child(encodedCourse);
+                userLocation.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() == null) {
+                            userLocation.setValue(myCourse);
+                            setResult(Activity.RESULT_OK);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
+
                 break;
 
             case R.id.cancelButton:
+                setResult(Activity.RESULT_CANCELED);
+                finish();
                 break;
         }
     }

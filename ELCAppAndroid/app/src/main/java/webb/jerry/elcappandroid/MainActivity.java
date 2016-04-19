@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -30,6 +31,8 @@ import java.util.Set;
 
 
 import webb.jerry.elcappandroid.Model.BluetoothSingleton;
+import webb.jerry.elcappandroid.Model.Course;
+import webb.jerry.elcappandroid.Model.CourseSingleton;
 import webb.jerry.elcappandroid.Model.User;
 
 
@@ -135,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userType = 0;
 
         deviceNames = new ArrayList<>();
+        loadCourses();
 
         userSelectionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -305,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 String encodedEmail = editTextNewEmail.getText().toString()
                                         .replace(".", ",");
                                 final Firebase userLocation = new Firebase(getResources().getString(string.Firebase_url))
-                                        .child(encodedEmail);
+                                        .child("Users").child(encodedEmail);
                                 userLocation.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -344,5 +348,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 viewRegister.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    private void loadCourses() {
+        Firebase userLocation = new Firebase(getResources().getString(string.Firebase_url));
+        userLocation.child("Courses").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
+                Log.d("TAG", "i'M HERE");
+                Log.d("TAG", Integer.toString(newCourse.size()));
+                Course myCourse = new Course();
+                myCourse.setClassName(newCourse.get("className").toString());
+                myCourse.setBeaconName(newCourse.get("beaconName").toString());
+                myCourse.setInstructorName(newCourse.get("instructorName").toString());
+                myCourse.setDates(newCourse.get("dates").toString());
+
+                CourseSingleton c = CourseSingleton.get(getApplicationContext());
+                c.addCourse(myCourse);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 }

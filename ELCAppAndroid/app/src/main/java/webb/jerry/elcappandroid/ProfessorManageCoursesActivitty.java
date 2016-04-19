@@ -1,5 +1,6 @@
 package webb.jerry.elcappandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,6 +36,8 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 // Go to seperate create course activity
+                Intent i = new Intent(getApplicationContext(),InstructorAdmitActivity.class);
+
             }
         });
 

@@ -11,21 +11,21 @@ import android.widget.Toast;
 /**
  * Created by LJ on 4/18/16.
  */
-public class BluetoothSingletonClass {
-    public static BluetoothSingletonClass sBluetoothSingleton;
+public class BluetoothSingleton {
+    public static BluetoothSingleton sBluetoothSingleton;
     //    private static final int DISCOVERY_REQUEST = 1;
     private Context mAppContext;
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;
 
-    private BluetoothSingletonClass(Context c){
+    private BluetoothSingleton(Context c){
         this.mAppContext = c;
         initBluetooth();
     }
 
-    public static BluetoothSingletonClass get(Context c) {
+    public static BluetoothSingleton get(Context c) {
         if(sBluetoothSingleton == null){
-            sBluetoothSingleton = new BluetoothSingletonClass(c.getApplicationContext());
+            sBluetoothSingleton = new BluetoothSingleton(c.getApplicationContext());
         }
         return sBluetoothSingleton;
     }

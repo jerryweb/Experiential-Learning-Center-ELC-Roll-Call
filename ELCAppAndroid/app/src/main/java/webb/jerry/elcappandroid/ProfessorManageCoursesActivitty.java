@@ -3,6 +3,7 @@ package webb.jerry.elcappandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,14 +30,16 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
 
         buttonCreateCourse = (Button) findViewById(R.id.buttonCreateCourse);
         listViewCourses = (ListView) findViewById(R.id.listViewCourses);
-        courseAdapter = new CourseAdapter(this, courses);
-        listViewCourses.setAdapter(courseAdapter);
+        //courseAdapter = new CourseAdapter(this, courses);
+        //listViewCourses.setAdapter(courseAdapter);
 
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Go to seperate create course activity
+                Log.d("TAG", "I'm here");
                 Intent i = new Intent(getApplicationContext(),InstructorAdmitActivity.class);
+                startActivity(i);
 
             }
         });

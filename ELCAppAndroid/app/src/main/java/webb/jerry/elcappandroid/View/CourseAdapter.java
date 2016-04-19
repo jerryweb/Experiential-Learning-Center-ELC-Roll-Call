@@ -32,17 +32,17 @@ public class CourseAdapter extends ArrayAdapter<Course>  {
             , false);
         }
 
-        CheckBox checkBoxStudentPresent = (CheckBox) convertView.findViewById(R.id.checkBoxStudentPresent);
+        CheckBox checkBoxStudentPresent = (CheckBox) convertView.findViewById(R.id.selectClassCheckBox);
         TextView textViewCourseName = (TextView) convertView.findViewById(R.id.textViewCourseName);
         TextView textViewInstructorName = (TextView) convertView.findViewById(R.id.textViewInstructorName);
         TextView textViewDate = (TextView) convertView.findViewById(R.id.textViewDate);
 
-        if(instructorInterface == false){
-            checkBoxStudentPresent.setVisibility(View.VISIBLE);
-        }
-        else{
-            checkBoxStudentPresent.setVisibility(View.INVISIBLE);
-        }
+//        if(instructorInterface == false){
+//            checkBoxStudentPresent.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            checkBoxStudentPresent.setVisibility(View.INVISIBLE);
+//        }
 
 
         textViewCourseName.setText(course.getClassName());

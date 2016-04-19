@@ -216,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 editor.putString(PREF_EMAIL, encodedEmail);
 
                                 editor.commit();
+
                                 Log.d(TAG, "THIS IS HAPPENED");
 
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
@@ -234,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     mBluetoothAdapter.cancelDiscovery();
                     mBluetoothAdapter.startDiscovery();
-    //                }
+//                    }
                 break;
 
             case R.id.registerButton:
@@ -258,7 +259,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.buttonCreateAccount:
                 Intent intentRegister;
-                if(true) {
+                final String checkedButton = ((RadioButton) findViewById(userSelectionRadioGroup.getCheckedRadioButtonId())).
+                        getText().toString();
+                if(checkedButton.equals("Student")) {
                     intentRegister = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
                 }
                 else {
@@ -294,8 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 user.setUniversityId(Integer.parseInt(editTextUniversityId.getText().toString()));
 
                                 if(userSelectionRadioGroup.getCheckedRadioButtonId() != -1) {
-                                    String checkedButton = ((RadioButton) findViewById(userSelectionRadioGroup.getCheckedRadioButtonId())).
-                                            getText().toString();
+
                                     if (checkedButton.equals("Student"))
                                         user.setStudent(true);
                                 }

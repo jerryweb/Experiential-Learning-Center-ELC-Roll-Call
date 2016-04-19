@@ -32,6 +32,10 @@
         <activity android:name=".CourseSelectionActivity"
                   android:label="Select Student Courses">
         </activity>
+        <activity android:name=".InstructorAdmitActivity"
+                  android:label="Create Course">
+
+        </activity>
     </application>
 
 </manifest>

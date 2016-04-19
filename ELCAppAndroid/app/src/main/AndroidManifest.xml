@@ -29,6 +29,9 @@
             android:name=".StudentClassManagementActivity"
             android:label="Manage Student Courses">
         </activity>
+        <activity android:name=".CourseSelectionActivity"
+                  android:label="Select Student Courses">
+        </activity>
     </application>
 
 </manifest>

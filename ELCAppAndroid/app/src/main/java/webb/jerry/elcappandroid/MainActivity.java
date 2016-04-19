@@ -275,6 +275,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 user.setUniversityId(Integer.parseInt(editTextUniversityId.getText().toString()));
 
                                 // check if the student radio button is pressed
+
+
                                 String encodedEmail = editTextNewEmail.getText().toString()
                                         .replace(".", ",");
                                 final Firebase userLocation = new Firebase(getResources().getString(string.Firebase_url))

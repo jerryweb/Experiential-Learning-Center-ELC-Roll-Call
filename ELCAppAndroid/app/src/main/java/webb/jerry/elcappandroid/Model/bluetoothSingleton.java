@@ -16,7 +16,7 @@ import android.widget.Toast;
  */
 public class BluetoothSingleton {
     public static BluetoothSingleton sBluetoothSingleton;
-    private static final int DISCOVERY_REQUEST = 1;
+//    private static final int DISCOVERY_REQUEST = 1;
     private Context mAppContext;
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;

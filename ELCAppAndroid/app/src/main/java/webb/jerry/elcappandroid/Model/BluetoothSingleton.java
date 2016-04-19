@@ -17,6 +17,7 @@ public class BluetoothSingleton {
     private Context mAppContext;
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;
+    Boolean scanning;
 
     private BluetoothSingleton(Context c){
         this.mAppContext = c;
@@ -32,7 +33,7 @@ public class BluetoothSingleton {
 
     public boolean initBluetooth(){
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
+        scanning = false;
 
         if(mBluetoothAdapter == null){
             Toast.makeText(mAppContext, "Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
@@ -60,9 +61,11 @@ public class BluetoothSingleton {
     public void toggleBeaconSearch(){
         if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
+            scanning = false;
         }
-        else if (!mBluetoothAdapter.isDiscovering()){
+        else if (!scanning){
             mBluetoothAdapter.startDiscovery();
+            scanning= true;
         }
     }
 

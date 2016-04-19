@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.Course;
 import webb.jerry.elcappandroid.View.CourseAdapter;
 

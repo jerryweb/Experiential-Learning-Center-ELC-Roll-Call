@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.User;
 
 

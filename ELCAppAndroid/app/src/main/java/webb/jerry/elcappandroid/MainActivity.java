@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -274,8 +275,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 user.setLastName(editTextLastName.getText().toString());
                                 user.setUniversityId(Integer.parseInt(editTextUniversityId.getText().toString()));
 
-                                // check if the student radio button is pressed
-
+                                if(userSelectionRadioGroup.getCheckedRadioButtonId() != -1) {
+                                    String checkedButton = ((RadioButton) findViewById(userSelectionRadioGroup.getCheckedRadioButtonId())).
+                                            getText().toString();
+                                    if (checkedButton.equals("Student"))
+                                        user.setStudent(true);
+                                }
 
                                 String encodedEmail = editTextNewEmail.getText().toString()
                                         .replace(".", ",");

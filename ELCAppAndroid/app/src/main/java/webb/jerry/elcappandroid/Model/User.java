@@ -8,16 +8,19 @@ public class User {
     String lastName;
     String email;
     int universityId;
+    boolean student = false;
+    String [] myClasses;
 
     public User() {
 
     }
 
-    public User(String firstName, int universityId, String lastName, String email) {
+    public User(String firstName, int universityId, String lastName, String email, boolean student) {
         this.firstName = firstName;
         this.universityId = universityId;
         this.lastName = lastName;
         this.email = email;
+        this.student = student;
     }
 
     public String getFirstName() {
@@ -50,5 +53,21 @@ public class User {
 
     public void setUniversityId(int universityId) {
         this.universityId = universityId;
+    }
+
+    public boolean isStudent() {
+        return student;
+    }
+
+    public void setStudent(boolean student) {
+        this.student = student;
+    }
+
+    public String[] getMyClasses() {
+        return myClasses;
+    }
+
+    public void setMyClasses(String[] myClasses) {
+        this.myClasses = myClasses;
     }
 }

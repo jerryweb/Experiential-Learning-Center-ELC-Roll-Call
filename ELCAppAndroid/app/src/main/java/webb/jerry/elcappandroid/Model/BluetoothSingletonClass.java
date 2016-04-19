@@ -10,25 +10,22 @@ import android.widget.Toast;
 
 /**
  * Created by LJ on 4/18/16.
- * This allows for the application to scan for bluetooth across all activities
- * with one bluetooth instantiation. The main scanning and discovery methods
- * are located here.
  */
-public class BluetoothSingleton {
-    public static BluetoothSingleton sBluetoothSingleton;
+public class BluetoothSingletonClass {
+    public static BluetoothSingletonClass sBluetoothSingleton;
     //    private static final int DISCOVERY_REQUEST = 1;
     private Context mAppContext;
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;
 
-    private BluetoothSingleton(Context c){
+    private BluetoothSingletonClass(Context c){
         this.mAppContext = c;
         initBluetooth();
     }
 
-    public static BluetoothSingleton get(Context c) {
+    public static BluetoothSingletonClass get(Context c) {
         if(sBluetoothSingleton == null){
-            sBluetoothSingleton = new BluetoothSingleton(c.getApplicationContext());
+            sBluetoothSingleton = new BluetoothSingletonClass(c.getApplicationContext());
         }
         return sBluetoothSingleton;
     }

@@ -1,5 +1,6 @@
 package webb.jerry.elcappandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,6 +34,7 @@ public class StudentClassManagementActivity extends AppCompatActivity {
     ListView listViewStudntClassAttendance;
     CourseAdapter courseAdapter;
     Button scanForBeaconButton;
+    Button courseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class StudentClassManagementActivity extends AppCompatActivity {
         courseAdapter = new CourseAdapter(this, studentCourses);
 //        listViewStudntClassAttendance.setAdapter(courseAdapter);
         scanForBeaconButton = (Button) findViewById(R.id.scanForBeaconButton);
+        courseButton = (Button) findViewById(R.id.buttonRegister);
 
         // this allows the student to manually search for the beacon
         scanForBeaconButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +56,13 @@ public class StudentClassManagementActivity extends AppCompatActivity {
             }
         });
 
+        courseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CourseSelectionActivity.class);
+                startActivityForResult(i, 0);
+            }
+        });
 
 
     }

@@ -26,7 +26,7 @@ public class StudentAdapter extends ArrayAdapter<Course> {
         Course course =  getItem(position);
 
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_course, parent, false);
         }
 
         TextView courseTextView = (TextView) convertView.findViewById(R.id.textViewCourseName);

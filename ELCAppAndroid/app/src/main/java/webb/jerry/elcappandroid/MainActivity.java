@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                mBluetoothAdapter.cancelDiscovery();
 //            }
 //        }
-        BluetoothSingleton.get(this).sBluetoothSingleton.stopDiscovery(BluetoothSingleton.get(this));
+        BluetoothSingleton.get(this).sBluetoothSingleton.stopDiscovery();
         super.onPause();
     }
 

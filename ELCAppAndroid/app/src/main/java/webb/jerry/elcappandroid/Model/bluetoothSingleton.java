@@ -112,7 +112,7 @@ public class BluetoothSingleton {
         mAppContext.unregisterReceiver(this.mReceiver);
     }
 
-    public void stopDiscovery(BluetoothSingleton bluetoothSingleton){
+    public void stopDiscovery(){
         if (mBluetoothAdapter != null) {
             if (mBluetoothAdapter.isDiscovering()) {
                 mBluetoothAdapter.cancelDiscovery();

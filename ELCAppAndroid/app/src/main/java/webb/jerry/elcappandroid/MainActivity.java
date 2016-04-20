@@ -354,8 +354,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
-               // Log.d("TAG", "I'm HERE");
-               // Log.d("TAG", Integer.toString(newCourse.size()));
+                Log.d("TAG", "I'm Here");
+                Log.d("TAG", Integer.toString(newCourse.size()));
                 Course myCourse = new Course();
                 myCourse.setClassName(newCourse.get("className").toString());
                 myCourse.setBeaconName(newCourse.get("beaconName").toString());

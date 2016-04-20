@@ -19,7 +19,7 @@ public class BeaconSingleton {
     public BeaconSingleton(Context c){
         this.mAppContext = c;
         mBeacons = new ArrayList<Beacon>();
-        Beacon beacon = new Beacon("XY-8EC4-64", "", "", "","00:EA:23:33:8E:C4");
+        Beacon beacon = new Beacon("XY-Beacon", "", "", "","00:EB:19:00:4E:A2");
         mBeacons.add(beacon);
     }
 
@@ -61,6 +61,6 @@ public class BeaconSingleton {
     }
 
     public String getBeaconName(){
-        return "XY-8EC4-64";
+        return "XY-Beacon";
     }
 }

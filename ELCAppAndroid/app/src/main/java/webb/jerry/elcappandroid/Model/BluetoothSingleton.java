@@ -130,7 +130,7 @@ public class BluetoothSingleton {
                         Firebase userLocation = new Firebase(mAppContext.getResources().
                                 getString(R.string.Firebase_url));
                         userLocation.child("Users").child(encodedEmail)
-                                .child("courses").addChildEventListener(new ChildEventListener() {
+                                .addChildEventListener(new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -138,9 +138,9 @@ public class BluetoothSingleton {
                                 Log.d("TAG", "I'm HERE");
                                 Log.d("TAG", Integer.toString(newCourse.size()));
                                 if (newCourse.get("beaconName").toString().equals(b.getBeaconName())) {
-                                   final Firebase userLocation1 = new Firebase(mAppContext.getResources().getString(R.string.Firebase_url))
+                                  final Firebase userLocation1 = new Firebase(mAppContext.getResources().getString(R.string.Firebase_url))
                                             .child("Courses").child(newCourse.get("className")
-                                            + " " + newCourse.get("dates")).child(formattedDate);
+                                            + "-" + newCourse.get("dates")).child(formattedDate);
                                     userLocation1.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {

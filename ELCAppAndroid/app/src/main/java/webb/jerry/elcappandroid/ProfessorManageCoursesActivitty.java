@@ -68,7 +68,7 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                setResult(Activity.RESULT_OK);
+                setResult(2);
                 finish();
             }
         });

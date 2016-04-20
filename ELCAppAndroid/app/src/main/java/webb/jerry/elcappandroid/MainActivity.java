@@ -181,7 +181,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if(resultCode == LOGOUT){
             Toast.makeText(getApplicationContext(), "Logging out", Toast.LENGTH_SHORT).show();
-
+            textEmailAddress.setText(null);
+            textPassword.setText(null);
         }
     }
 
@@ -233,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
 
-                                startActivityForResult(intentLogin,2);
+                                startActivityForResult(intentLogin, 2);
                             }
 
                             @Override

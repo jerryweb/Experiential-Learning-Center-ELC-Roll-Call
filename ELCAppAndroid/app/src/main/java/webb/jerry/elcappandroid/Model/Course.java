@@ -16,6 +16,7 @@ public class Course implements Serializable{
     public static final String TAG = "ELCApp.webb.jerry.elc_roll_call.tag";
 
     private String className, instructorName, dates, beaconName;
+    boolean checked = false;
 //    private ArrayList<Boolean> daysPresent;
     private Map<Date, Boolean> daysPresent;
     public Course(){
@@ -75,4 +76,11 @@ public class Course implements Serializable{
         this.beaconName = beaconName;
     }
 
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 }

@@ -201,14 +201,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(getApplicationContext(),
                                         "User logged in!", Toast.LENGTH_LONG).show();
                                 Intent intentLogin;
+                                // TODO check if student or professor
                                 if (true) {
                                     intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
                                 } else {
                                     intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
 
                                 }
-
-                                Log.d(TAG, "THIS IS HAPPENING");
 
                                 String encodedEmail = textEmailAddress.getText().toString()
                                         .replace(".", ",");
@@ -220,8 +219,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 editor.putString(PREF_EMAIL, encodedEmail);
 
                                 editor.commit();
-
-                                Log.d(TAG, "THIS IS HAPPENED");
 
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
@@ -357,8 +354,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
-                Log.d("TAG", "i'M HERE");
-                Log.d("TAG", Integer.toString(newCourse.size()));
+               // Log.d("TAG", "I'm HERE");
+               // Log.d("TAG", Integer.toString(newCourse.size()));
                 Course myCourse = new Course();
                 myCourse.setClassName(newCourse.get("className").toString());
                 myCourse.setBeaconName(newCourse.get("beaconName").toString());

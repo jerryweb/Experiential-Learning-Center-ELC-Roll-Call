@@ -7,8 +7,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:orientation="vertical"
@@ -48,7 +47,17 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:id="@+id/selectClassCheckBox"
-      android:layout_weight=".9"/>
+      android:layout_weight=".5"
+      android:layout_gravity="right"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/attendanceButton"
+            android:text="Attendance"
+            android:background="@color/teal"
+            android:textColor="@color/white"
+            android:layout_gravity="right"/>
 
     </LinearLayout>
 

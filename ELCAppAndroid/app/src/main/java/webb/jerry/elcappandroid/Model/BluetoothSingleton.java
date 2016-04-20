@@ -1,17 +1,35 @@
 package webb.jerry.elcappandroid.Model;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Map;
+
+import webb.jerry.elcappandroid.R;
 
 /**
  * Created by LJ on 4/18/16.
  */
 public class BluetoothSingleton {
+    public static final String PREF_EMAIL = "elc.rollcall.preferences.email";
+    private static final String PREF_FILENAME = "webb.jerry.elcappandroid.preferences.app_prefs";
     public static BluetoothSingleton sBluetoothSingleton;
     //    private static final int DISCOVERY_REQUEST = 1;
     private Context mAppContext;
@@ -99,6 +117,68 @@ public class BluetoothSingleton {
                 boolean foundBeacon = BeaconSingleton.get(mAppContext).searchBeacon(device.getName(),device.getAddress());
                 if(foundBeacon){
                     Toast.makeText(mAppContext,"we can now log in!",Toast.LENGTH_SHORT).show();
+                    //Tell firebase to mark student as here
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+                    final String formattedDate = df.format(calendar.getTime());
+
+                    SharedPreferences prefs = mAppContext.getSharedPreferences(
+                            PREF_FILENAME, mAppContext.MODE_PRIVATE);
+                    final String encodedEmail = prefs.getString(PREF_EMAIL, "current_user");
+                   final BeaconSingleton b = new BeaconSingleton(mAppContext.getApplicationContext());
+
+                        Firebase userLocation = new Firebase(mAppContext.getResources().
+                                getString(R.string.Firebase_url));
+                        userLocation.child("Users").child(encodedEmail)
+                                .child("courses").addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                                final Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
+                                Log.d("TAG", "I'm HERE");
+                                Log.d("TAG", Integer.toString(newCourse.size()));
+                                if (newCourse.get("beaconName").toString().equals(b.getBeaconName())) {
+                                   final Firebase userLocation1 = new Firebase(mAppContext.getResources().getString(R.string.Firebase_url))
+                                            .child("Courses").child(newCourse.get("className")
+                                            + " " + newCourse.get("dates")).child(formattedDate);
+                                    userLocation1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.getValue() == null) {
+                                                userLocation1.setValue(newCourse.get("firstName")
+                                                + " " + newCourse.get("lastName"));
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(FirebaseError firebaseError) {
+
+                                        }
+                                    });
+                                }
+
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
                 }
 
             }

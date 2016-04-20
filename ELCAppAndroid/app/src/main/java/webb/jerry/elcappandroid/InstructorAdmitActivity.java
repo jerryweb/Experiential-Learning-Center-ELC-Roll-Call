@@ -13,6 +13,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.Course;
 import webb.jerry.elcappandroid.Model.CourseSingleton;
 
@@ -124,4 +125,12 @@ public class InstructorAdmitActivity extends AppCompatActivity implements View.O
                 break;
         }
     }
+
+    @Override
+    public void onPause() {
+
+        BluetoothSingleton.get(this).stopDiscovery();
+        super.onPause();
+    }
+
 }

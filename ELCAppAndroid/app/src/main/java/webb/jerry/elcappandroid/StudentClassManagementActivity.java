@@ -90,6 +90,7 @@ public class StudentClassManagementActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         setResult(2);
+                        BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
                         finish();
                     }
                 });
@@ -145,4 +146,13 @@ public class StudentClassManagementActivity extends AppCompatActivity {
 
         courseAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onPause() {
+
+        BluetoothSingleton.get(this).stopDiscovery();
+        super.onPause();
+    }
+
+
 }

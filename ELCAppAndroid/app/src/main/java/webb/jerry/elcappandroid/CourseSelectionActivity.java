@@ -20,6 +20,7 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.Course;
 import webb.jerry.elcappandroid.Model.CourseSingleton;
 import webb.jerry.elcappandroid.View.CourseAdapter;
@@ -106,5 +107,17 @@ public class CourseSelectionActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onPause() {
+
+        BluetoothSingleton.get(this).stopDiscovery();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        BluetoothSingleton.get(this).unregisterReceiver();
+        super.onDestroy();
     }
 }

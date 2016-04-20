@@ -105,7 +105,7 @@ public class BluetoothSingleton {
                 //discovery starts, we can show progress dialog or perform other tasks
                 Toast.makeText(mAppContext,"started",Toast.LENGTH_SHORT).show();
 
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action) && scanning) {
                 //discovery finishes, dismiss progress dialog
                 Toast.makeText(mAppContext,"reseting search",Toast.LENGTH_SHORT).show();
                 mBluetoothAdapter.startDiscovery();
@@ -193,6 +193,7 @@ public class BluetoothSingleton {
     };
 
     public void unregisterReceiver(){
+        scanning = false;
         mAppContext.unregisterReceiver(this.mReceiver);
     }
 
@@ -200,6 +201,7 @@ public class BluetoothSingleton {
         if (mBluetoothAdapter != null) {
             if (mBluetoothAdapter.isDiscovering()) {
                 mBluetoothAdapter.cancelDiscovery();
+                scanning = false;
             }
         }
     }

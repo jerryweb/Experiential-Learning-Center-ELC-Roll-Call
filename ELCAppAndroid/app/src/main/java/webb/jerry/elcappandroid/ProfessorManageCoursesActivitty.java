@@ -18,6 +18,7 @@ import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
 import java.util.Map;
 
+import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.Course;
 import webb.jerry.elcappandroid.View.CourseAdapter;
 
@@ -69,6 +70,7 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 setResult(2);
+                BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
                 finish();
             }
         });
@@ -125,6 +127,13 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
         super.onActivityResult(requestCode, resultCode, data);
 
         courseAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPause() {
+
+        BluetoothSingleton.get(this).stopDiscovery();
+        super.onPause();
     }
 
 }

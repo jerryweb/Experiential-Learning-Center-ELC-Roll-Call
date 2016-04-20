@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String PREF_IS_STUDENT = "elc.rollcall.preferences.isStudent";
     private static final String PREF_FILENAME = "webb.jerry.elcappandroid.preferences.app_prefs";
     private static final int DISCOVERY_REQUEST = 1;
+    private static final int LOGOUT = 2;
 
     View viewLogin;
     EditText textEmailAddress;
@@ -178,6 +179,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(resultCode == DISCOVERY_REQUEST){
             Toast.makeText(getApplicationContext(), "Discovery in progress", Toast.LENGTH_SHORT).show();
         }
+        else if(resultCode == LOGOUT){
+            Toast.makeText(getApplicationContext(), "Logging out", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
@@ -228,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
 
-                                startActivity(intentLogin);
+                                startActivityForResult(intentLogin,2);
                             }
 
                             @Override

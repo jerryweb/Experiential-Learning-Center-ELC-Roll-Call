@@ -1,5 +1,6 @@
 package webb.jerry.elcappandroid;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
 
     ArrayList<Course> courses;
     Button buttonCreateCourse;
+    Button buttonInstructorLogout;
     ListView listViewCourses;
     CourseAdapter courseAdapter;
 
@@ -29,6 +31,8 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
         setContentView(R.layout.activity_professor_manage_courses);
 
         buttonCreateCourse = (Button) findViewById(R.id.buttonCreateCourse);
+        buttonInstructorLogout = (Button) findViewById(R.id.buttonInstructorLogout);
+
         listViewCourses = (ListView) findViewById(R.id.listViewCourses);
         courseAdapter = new CourseAdapter(this, courses);
         listViewCourses.setAdapter(courseAdapter);
@@ -38,9 +42,18 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
             public void onClick(View v) {
                 // Go to seperate create course activity
                 Log.d("TAG", "I'm here");
-                Intent i = new Intent(getApplicationContext(),InstructorAdmitActivity.class);
+                Intent i = new Intent(getApplicationContext(), InstructorAdmitActivity.class);
                 startActivityForResult(i, 0);
 
+            }
+        });
+
+        buttonInstructorLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         });
 

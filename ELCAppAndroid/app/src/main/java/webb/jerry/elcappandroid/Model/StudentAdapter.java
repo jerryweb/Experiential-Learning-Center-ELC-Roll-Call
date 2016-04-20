@@ -32,7 +32,6 @@ public class StudentAdapter extends ArrayAdapter<Course> {
         TextView courseTextView = (TextView) convertView.findViewById(R.id.textViewCourseName);
         TextView professorTextView = (TextView) convertView.findViewById(R.id.textViewInstructorName);
         TextView dateTextView = (TextView) convertView.findViewById(R.id.textViewDate);
-
         courseTextView.setText(course.getClassName());
         professorTextView.setText(course.getInstructorName());
         dateTextView.setText(course.getDates());

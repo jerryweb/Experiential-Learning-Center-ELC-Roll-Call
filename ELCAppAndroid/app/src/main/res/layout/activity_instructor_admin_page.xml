@@ -109,6 +109,7 @@
                     android:id="@+id/startTimeEditText"
                     android:layout_weight=".5"
                     android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:hint="12:00"
                     android:textSize="@dimen/text_medium_size" />
             </LinearLayout>
@@ -138,6 +139,7 @@
                     android:ems="10"
                     android:id="@+id/endTimeEditText"
                     android:layout_weight=".5"
+                    android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:hint="12:00"
                     android:textSize="@dimen/text_medium_size" />

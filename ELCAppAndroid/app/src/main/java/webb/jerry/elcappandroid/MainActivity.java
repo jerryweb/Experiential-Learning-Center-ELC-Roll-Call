@@ -265,20 +265,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentRegister;
                 final String checkedButton = ((RadioButton) findViewById(userSelectionRadioGroup.getCheckedRadioButtonId())).
                         getText().toString();
-                if(checkedButton.equals("Student")) {
-                    intentRegister = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
-                }
-                else {
-                    intentRegister = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
-                }
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, editTextNewEmail.getText());
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, editTextNewPassword.getText());
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_CONFIRM_PASSWORD, editTextNewConfirmPass.getText());
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_FIRST_NAME, editTextfirstName.getText());
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_LAST_NAME, editTextLastName.getText());
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_UNIVERSITY_ID, editTextUniversityId.getText());
-                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_USER_TYPE, userType);
-                startActivity(intentRegister);
+//                if(checkedButton.equals("Student")) {
+//                    intentRegister = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
+//                }
+//                else {
+//                    intentRegister = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+//                }
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, editTextNewEmail.getText());
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, editTextNewPassword.getText());
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_CONFIRM_PASSWORD, editTextNewConfirmPass.getText());
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_FIRST_NAME, editTextfirstName.getText());
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_LAST_NAME, editTextLastName.getText());
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_UNIVERSITY_ID, editTextUniversityId.getText());
+//                intentRegister.putExtra(StudentClassManagementActivity.EXTRA_USER_TYPE, userType);
+//                startActivity(intentRegister);
 
                 Firebase ref2 = new Firebase(getResources().getString(R.string.Firebase_url));
                 Log.d(TAG, "I'm here");
@@ -344,7 +344,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
-
+                viewRegister.setVisibility(View.GONE);
+                viewLogin.setVisibility(View.VISIBLE);
                 break;
 
             case id.buttonBack:

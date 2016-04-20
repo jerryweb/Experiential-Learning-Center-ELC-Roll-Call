@@ -21,6 +21,7 @@ import java.util.Map;
 import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.Course;
 import webb.jerry.elcappandroid.Model.CourseSingleton;
+import webb.jerry.elcappandroid.Model.StudentAdapter;
 import webb.jerry.elcappandroid.View.CourseAdapter;
 
 /**
@@ -60,6 +61,7 @@ public class StudentClassManagementActivity extends AppCompatActivity {
                 getApplicationContext(),
                 studentCourses);
         courseAdapter.noCheckBox = true;
+
         listViewStudntClassAttendance.setAdapter(courseAdapter);
 
 
@@ -125,4 +127,10 @@ public class StudentClassManagementActivity extends AppCompatActivity {
         });
     }
 
-        }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        courseAdapter.notifyDataSetChanged();
+    }
+}

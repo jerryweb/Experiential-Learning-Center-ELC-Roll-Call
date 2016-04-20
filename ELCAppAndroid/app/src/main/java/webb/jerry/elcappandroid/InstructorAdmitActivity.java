@@ -1,6 +1,7 @@
 package webb.jerry.elcappandroid;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,6 +20,8 @@ import webb.jerry.elcappandroid.Model.CourseSingleton;
  * Created by LJ on 4/18/16.
  */
 public class InstructorAdmitActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String PREF_EMAIL = "elc.rollcall.preferences.email";
+    private static final String PREF_FILENAME = "webb.jerry.elcappandroid.preferences.app_prefs";
     EditText courseNameEditText;
     EditText beaconNameEditText;
     EditText majorEditText;
@@ -88,6 +91,30 @@ public class InstructorAdmitActivity extends AppCompatActivity implements View.O
 
                     }
                 });
+
+
+                SharedPreferences prefs = getSharedPreferences(
+                        PREF_FILENAME, MODE_PRIVATE);
+                String encodedEmail = prefs.getString(PREF_EMAIL, "current_user");
+                final Firebase userLocation1 = new Firebase(getResources().getString(R.string.Firebase_url))
+                        .child("Users").child(encodedEmail).child("courses")
+                        .child(myCourse.getClassName() + " " + myCourse.getDates());
+                userLocation1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() == null) {
+                            userLocation1.setValue(myCourse);
+                            setResult(Activity.RESULT_OK);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
+
 
                 break;
 

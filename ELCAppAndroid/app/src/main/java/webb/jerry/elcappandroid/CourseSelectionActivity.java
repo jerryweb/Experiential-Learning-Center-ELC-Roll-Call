@@ -83,6 +83,11 @@ public class CourseSelectionActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() == null) {
                                 userLocation.setValue(c);
+                                mAdapter = new CourseAdapter(
+                                        getApplicationContext(),
+                                        mCourses);
+                                mAdapter.noCheckBox = false;
+                                mListView.setAdapter(mAdapter);
                                 setResult(Activity.RESULT_OK);
                                 finish();
                             }

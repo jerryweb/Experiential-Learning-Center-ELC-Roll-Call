@@ -41,6 +41,7 @@ import static webb.jerry.elcappandroid.R.*;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = "elc.webb.jerry.tag";
     public static final String PREF_EMAIL = "elc.rollcall.preferences.email";
+    public static final String PREF_IS_STUDENT = "elc.rollcall.preferences.isStudent";
     private static final String PREF_FILENAME = "webb.jerry.elcappandroid.preferences.app_prefs";
     private static final int DISCOVERY_REQUEST = 1;
 
@@ -201,23 +202,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         "User logged in!", Toast.LENGTH_LONG).show();
                                 Intent intentLogin;
                                 // TODO check if student or professor
-                                if (true) {
+
+
+                                final String encodedEmail = textEmailAddress.getText().toString()
+                                        .replace(".", ",");
+                                SharedPreferences prefs = getSharedPreferences(
+                                        PREF_FILENAME, MODE_PRIVATE);
+
+
+                                boolean student = prefs.getBoolean(PREF_IS_STUDENT, true);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString(PREF_EMAIL, encodedEmail);
+                                editor.putBoolean(PREF_IS_STUDENT, student);
+
+                                editor.commit();
+
+
+                                if (student) {
                                     intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
                                 } else {
                                     intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
 
                                 }
-
-                                String encodedEmail = textEmailAddress.getText().toString()
-                                        .replace(".", ",");
-                                SharedPreferences prefs = getSharedPreferences(
-                                        PREF_FILENAME, MODE_PRIVATE);
-
-                                SharedPreferences.Editor editor = prefs.edit();
-
-                                editor.putString(PREF_EMAIL, encodedEmail);
-
-                                editor.commit();
 
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
                                 intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
@@ -324,6 +330,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 SharedPreferences.Editor editor = prefs.edit();
 
                                 editor.putString(PREF_EMAIL, encodedEmail);
+                                if (user.isStudent())
+                                    editor.putBoolean(PREF_IS_STUDENT, true );
+                                else
+                                    editor.putBoolean(PREF_IS_STUDENT, false);
 
                                 editor.commit();
                             }

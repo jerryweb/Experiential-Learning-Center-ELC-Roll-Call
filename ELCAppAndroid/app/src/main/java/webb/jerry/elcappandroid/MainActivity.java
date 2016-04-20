@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    Toast.makeText(getApplicationContext(),"Please enter a valid email address", Toast.LENGTH_SHORT).show();
 //                }
 //                else{
-
+                final User user = new User();
                 Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
                 ref.authWithPassword(textEmailAddress.getText().toString(),
                         textPassword.getText().toString(),
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onAuthenticated(AuthData authData) {
                                 Toast.makeText(getApplicationContext(),
                                         "User logged in!", Toast.LENGTH_LONG).show();
-                                Intent intentLogin;
+
                                 // TODO check if student or professor
 
 
@@ -224,17 +224,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 editor.commit();
 
 
-                                if (student) {
-                                    intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
-                                } else {
-                                    intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+                                Firebase userLocation = new Firebase(getResources().getString(R.string.Firebase_url));
+                                userLocation.child("Users").child(encodedEmail).child("User info")
+                                        .addChildEventListener(new ChildEventListener() {
+                                            @Override
+                                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                                boolean b;
+                                                Log.d("TAG", dataSnapshot.toString());
+                                                //Log.d("TAG", "I'm HERE");
+                                                if (dataSnapshot.getKey().equals("student")) {
+                                                    Log.d("TAG", dataSnapshot.getValue().toString());
+                                                    if (dataSnapshot.getValue().toString()
+                                                            .equals("true")) {
+                                                        user.setStudent(true);
+                                                        b = true;
+                                                        Log.d("TAG", "SETTING TO TRUE");
+                                                        Intent intentLogin;
+                                                        if (user.isStudent()) {
+                                                            Log.d("TAG","This is a student");
 
-                                }
+                                                            intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
+                                                        } else {
+                                                            intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
 
-                                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
-                                intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+                                                        }
 
-                                startActivityForResult(intentLogin, 2);
+                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
+                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+                                                        Log.d("TAG", "HEY "+ Boolean.toString(user.isStudent()));
+
+                                                        startActivityForResult(intentLogin, 2);}
+                                                    else if (dataSnapshot.getValue().toString()
+                                                            .equals("false")) {
+                                                        user.setStudent(false);
+                                                        Log.d("TAG", "SETTING TO FALSE");
+
+                                                        Intent intentLogin;
+                                                        if (user.isStudent()) {
+                                                            Log.d("TAG","This is a student");
+
+                                                            intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
+                                                        } else {
+                                                            intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+
+                                                        }
+
+                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
+                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+                                                        Log.d("TAG", "HEY " + Boolean.toString(user.isStudent()));
+
+                                                        startActivityForResult(intentLogin, 2); }
+                                                }
+
+
+                                            }
+
+                                            @Override
+                                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                                            }
+
+                                            @Override
+                                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                            }
+
+                                            @Override
+                                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(FirebaseError firebaseError) {
+
+                                            }
+                                        });
                             }
 
                             @Override
@@ -245,6 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                         });
+
+
 
                 break;
 
@@ -306,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 user.setLastName(editTextLastName.getText().toString());
                                 user.setUniversityId(Integer.parseInt(editTextUniversityId.getText().toString()));
 
-                                if(userSelectionRadioGroup.getCheckedRadioButtonId() != -1) {
+                                if (userSelectionRadioGroup.getCheckedRadioButtonId() != -1) {
 
                                     if (checkedButton.equals("Student"))
                                         user.setStudent(true);
@@ -315,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 String encodedEmail = editTextNewEmail.getText().toString()
                                         .replace(".", ",");
                                 final Firebase userLocation = new Firebase(getResources().getString(string.Firebase_url))
-                                        .child("Users").child(encodedEmail);
+                                        .child("Users").child(encodedEmail).child("User info");
                                 userLocation.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -337,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 editor.putString(PREF_EMAIL, encodedEmail);
                                 if (user.isStudent())
-                                    editor.putBoolean(PREF_IS_STUDENT, true );
+                                    editor.putBoolean(PREF_IS_STUDENT, true);
                                 else
                                     editor.putBoolean(PREF_IS_STUDENT, false);
 

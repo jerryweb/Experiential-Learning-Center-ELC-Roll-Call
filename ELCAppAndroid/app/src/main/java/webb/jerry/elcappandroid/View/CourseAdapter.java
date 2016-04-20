@@ -48,7 +48,7 @@ public class CourseAdapter extends ArrayAdapter<Course>  {
 
         if (noCheckBox) {
             Log.d("TAG", "I dont want that check box");
-            attendanceButton.setVisibility(View.VISIBLE);
+//            attendanceButton.setVisibility(View.VISIBLE);
             checkBoxStudentPresent.setVisibility(View.INVISIBLE);
         }
         else if (!noCheckBox){

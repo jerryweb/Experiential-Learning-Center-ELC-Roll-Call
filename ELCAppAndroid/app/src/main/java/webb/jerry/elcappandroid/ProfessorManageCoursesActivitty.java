@@ -70,7 +70,7 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 setResult(2);
-                BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
+//                BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
                 finish();
             }
         });
@@ -127,13 +127,6 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
         super.onActivityResult(requestCode, resultCode, data);
 
         courseAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onPause() {
-
-        BluetoothSingleton.get(this).stopDiscovery();
-        super.onPause();
     }
 
 }

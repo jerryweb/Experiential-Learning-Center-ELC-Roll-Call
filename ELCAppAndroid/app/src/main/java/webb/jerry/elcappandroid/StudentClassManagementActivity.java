@@ -1,15 +1,14 @@
 package webb.jerry.elcappandroid;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -21,8 +20,6 @@ import java.util.Map;
 
 import webb.jerry.elcappandroid.Model.BluetoothSingleton;
 import webb.jerry.elcappandroid.Model.Course;
-import webb.jerry.elcappandroid.Model.CourseSingleton;
-import webb.jerry.elcappandroid.Model.StudentAdapter;
 import webb.jerry.elcappandroid.View.CourseAdapter;
 
 /**
@@ -66,36 +63,48 @@ public class StudentClassManagementActivity extends AppCompatActivity {
                 studentCourses);
         courseAdapter.noCheckBox = true;
 
-        listViewStudntClassAttendance.setAdapter(courseAdapter);
 
+
+        if(BluetoothSingleton.get(this).mBluetoothAdapter == null){
+            Toast.makeText(getApplicationContext(), "Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+//        if (!BluetoothSingleton.get(this).initBluetooth()){
+//            turnOnBluetooth();
+//        }
+//
+        listViewStudntClassAttendance.setAdapter(courseAdapter);
+//        BluetoothSingleton.get(getApplicationContext()).initBluetooth();
+//        BluetoothSingleton.get(getApplicationContext()).toggleBeaconSearch();
 
                 // this allows the student to manually search for the beacon
-                scanForBeaconButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        BluetoothSingleton.get(getApplicationContext()).toggleBeaconSearch();
-                    }
-                });
-
-                courseButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), CourseSelectionActivity.class);
-                        startActivityForResult(i, 0);
-                    }
-                });
-
-                buttonStudentLogout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        setResult(2);
-                        BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
-                        finish();
-                    }
-                });
-
+        scanForBeaconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BluetoothSingleton.get(getApplicationContext()).toggleBeaconSearch();
             }
+        });
+
+        courseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CourseSelectionActivity.class);
+                BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
+                startActivityForResult(i, 0);
+            }
+        });
+
+        buttonStudentLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                setResult(2);
+                BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
+                finish();
+            }
+        });
+
+    }
     private void loadStudentCourses() {
         SharedPreferences prefs = getSharedPreferences(
                 PREF_FILENAME, MODE_PRIVATE);
@@ -143,16 +152,37 @@ public class StudentClassManagementActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+            courseAdapter.notifyDataSetChanged();
+        BluetoothSingleton.get(getApplicationContext()).initBluetooth();
 
-        courseAdapter.notifyDataSetChanged();
+    }
+
+    private void turnOnBluetooth(){
+        Intent btIntent = new Intent(BluetoothSingleton.get(this).mBluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(btIntent, 1);
     }
 
     @Override
     public void onPause() {
-
-        BluetoothSingleton.get(this).stopDiscovery();
         super.onPause();
+        BluetoothSingleton.get(this).stopDiscovery();
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        BluetoothSingleton.get(getApplicationContext()).resumeBluetoothActivity();
+    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        BluetoothSingleton.get(this).stopDiscovery();
+//    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BluetoothSingleton.get(getApplicationContext()).stopDiscovery();
+//        BluetoothSingleton.get(getApplicationContext()).unregisterReceiver();
+    }
 }

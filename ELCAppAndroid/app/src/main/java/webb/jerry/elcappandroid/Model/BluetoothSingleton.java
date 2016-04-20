@@ -36,11 +36,9 @@ public class BluetoothSingleton {
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;
     Boolean scanning;
-
     private BluetoothSingleton(Context c){
         this.mAppContext = c;
-        scanning = false;
-//        initBluetooth();
+        initBluetooth();
     }
 
     public static BluetoothSingleton get(Context c) {
@@ -52,6 +50,7 @@ public class BluetoothSingleton {
 
     public boolean initBluetooth(){
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        scanning = false;
 
         if(mBluetoothAdapter == null){
             Toast.makeText(mAppContext, "Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
@@ -68,8 +67,13 @@ public class BluetoothSingleton {
                 filter.addAction(BluetoothDevice.ACTION_FOUND);
                 filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
                 filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+                mReceiver.goAsync();
 
                 mAppContext.registerReceiver(mReceiver, filter);
+                mBluetoothAdapter.cancelDiscovery();
+                Log.d("TAG", String.valueOf(scanning));
+
+
             }
         }
         return true;
@@ -77,45 +81,45 @@ public class BluetoothSingleton {
 
     // Look for other devices within range to see if it matches the beacons requested
     public void toggleBeaconSearch(){
-        if (mBluetoothAdapter.isDiscovering()) {
-            mBluetoothAdapter.cancelDiscovery();
-            scanning = false;
-        }
-        else if (!scanning){
-            Toast.makeText(mAppContext,"started",Toast.LENGTH_SHORT).show();
-            mBluetoothAdapter.startDiscovery();
-            scanning= true;
-        }
+        mBluetoothAdapter.cancelDiscovery();
+        scanning = !scanning;
+//        Log.d("TAG", String.valueOf(scanning));
+        startScan();
     }
 
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+            mReceiver.goAsync();
+            if (mBluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 
                 if (state == BluetoothAdapter.STATE_ON) {
                     Toast.makeText(mAppContext,"Enabled",Toast.LENGTH_SHORT).show();
                 }
             }
-            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+            if (mBluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 //discovery starts, we can show progress dialog or perform other tasks
                 Toast.makeText(mAppContext,"started",Toast.LENGTH_SHORT).show();
-
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action) && scanning) {
+            }
+            else if (mBluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 //discovery finishes, dismiss progress dialog
                 Toast.makeText(mAppContext,"reseting search",Toast.LENGTH_SHORT).show();
-                mBluetoothAdapter.startDiscovery();
+                Log.d("TAG", String.valueOf(scanning));
 
-            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                startScan();
+            }
+            else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 //bluetooth device found
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String name = device.getName();
                 Toast.makeText(mAppContext,name,Toast.LENGTH_SHORT).show();
                 boolean foundBeacon = BeaconSingleton.get(mAppContext).searchBeacon(device.getName(),device.getAddress());
+
+
                 if(foundBeacon){
                     Toast.makeText(mAppContext,"Found the beacon!",Toast.LENGTH_SHORT).show();
                     //Tell firebase to mark student as here
@@ -130,58 +134,58 @@ public class BluetoothSingleton {
                     Log.d("TAG", "I'm HERE");
                         final Firebase userLocation = new Firebase(mAppContext.getResources().
                                 getString(R.string.Firebase_url));
-                        userLocation.child("Users").child(encodedEmail)
-                                .child("courses").addChildEventListener(new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    userLocation.child("Users").child(encodedEmail)
+                            .child("courses").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                                final Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
-                                Log.d("TAG", "I'm HERE");
-                                Log.d("TAG", Integer.toString(newCourse.size()));
-                                Log.d("TAG", newCourse.get("beaconName").toString());
-                                Log.d("TAG", b.getBeaconName());
-                                if (newCourse.get("beaconName").toString().equals(b.getBeaconName())) {
-                                    Log.d("TAG", "I did it!");
-                                    //String newEmail = encodedEmail.replace(",", ".");
-                                  final Firebase userLocation1 = new Firebase(mAppContext.getResources().getString(R.string.Firebase_url))
-                                            .child("Courses").child(newCourse.get("className")
-                                            + "-" + newCourse.get("dates")).child(formattedDate)
-                                          .child(encodedEmail);
-                                    userLocation1.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.getValue() == null) {
-                                                Log.d("TAG", "I did it!");
-                                                userLocation1.setValue("here");
-                                            }
+                            final Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
+                            Log.d("TAG", "I'm HERE");
+                            Log.d("TAG", Integer.toString(newCourse.size()));
+                            Log.d("TAG", newCourse.get("beaconName").toString());
+                            Log.d("TAG", b.getBeaconName());
+                            if (newCourse.get("beaconName").toString().equals(b.getBeaconName())) {
+                                Log.d("TAG", "I did it!");
+                                //String newEmail = encodedEmail.replace(",", ".");
+                                final Firebase userLocation1 = new Firebase(mAppContext.getResources().getString(R.string.Firebase_url))
+                                        .child("Courses").child(newCourse.get("className")
+                                                + "-" + newCourse.get("dates")).child(formattedDate)
+                                        .child(encodedEmail);
+                                userLocation1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.getValue() == null) {
+                                            Log.d("TAG", "I did it!");
+                                            userLocation1.setValue("here");
                                         }
+                                    }
 
-                                        @Override
-                                        public void onCancelled(FirebaseError firebaseError) {
+                                    @Override
+                                    public void onCancelled(FirebaseError firebaseError) {
 
-                                        }
-                                    });
-                                }
-
+                                    }
+                                });
                             }
 
-                            @Override
-                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        }
 
-                            }
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                            @Override
-                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        }
 
-                            }
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                            @Override
-                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                        }
 
-                            }
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-                            @Override
-                            public void onCancelled(FirebaseError firebaseError) {
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
 
                             }
                         });
@@ -192,9 +196,23 @@ public class BluetoothSingleton {
         }
     };
 
+    private void startScan(){
+        if(scanning){
+            mBluetoothAdapter.startDiscovery();
+        }
+    }
+
     public void unregisterReceiver(){
         scanning = false;
         mAppContext.unregisterReceiver(this.mReceiver);
+    }
+
+    public void resumeBluetoothActivity(){
+        if (mBluetoothAdapter != null) {
+            if (!mBluetoothAdapter.isDiscovering()) {
+                startScan();
+            }
+        }
     }
 
     public void stopDiscovery(){
@@ -204,5 +222,11 @@ public class BluetoothSingleton {
                 scanning = false;
             }
         }
+    }
+
+    public void startBluetoothDiscovery(){
+        mBluetoothAdapter.cancelDiscovery();
+        mBluetoothAdapter.startDiscovery();
+        scanning = true;
     }
 }

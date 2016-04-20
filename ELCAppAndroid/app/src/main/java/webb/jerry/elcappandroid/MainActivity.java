@@ -2,6 +2,7 @@ package webb.jerry.elcappandroid;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.BluetoothLeScanner;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button forgotPasswordButton;
     Button loginButton;
     Button registerButton;
-//    private BluetoothAdapter mBluetoothAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
     Set<BluetoothDevice> deviceSet;
     ArrayList<String> deviceNames;
 
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonClear;
     Button buttonBack;
     Integer userType;
+    BluetoothLeScanner mBluetoothLeScanner;
 //    IntentFilter filter;
 
     // Create the bluetooth receiver at the beginning of the activity
@@ -80,25 +82,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(layout.activity_main);
         Firebase.setAndroidContext(this);
 //        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        mBluetoothLeScanner = mBluetoothAdapter.getBluetoothLeScanner();
 
         init();
-
-        if(!BluetoothSingleton.get(this).initBluetooth()){
-            turnOnBluetooth();
-        }
-
-        if(BluetoothSingleton.get(this).mBluetoothAdapter == null){
-            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        else{
-            if(!BluetoothSingleton.get(this).mBluetoothAdapter.isEnabled()){
-                turnOnBluetooth();
-            }
-//            else{
-//              BluetoothSingleton.get(this).toggleBeaconSearch();
+//
+//        if(!BluetoothSingleton.get(this).initBluetooth()){
+//            turnOnBluetooth();
+//        }
+//
+//        if(BluetoothSingleton.get(this).mBluetoothAdapter == null){
+//            Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//        else{
+//            if(!BluetoothSingleton.get(this).mBluetoothAdapter.isEnabled()){
+//                turnOnBluetooth();
 //            }
-        }
+////            else{
+////              BluetoothSingleton.get(this).toggleBeaconSearch();
+////            }
+//        }
 
 
     }
@@ -149,23 +152,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void turnOnBluetooth(){
-        Intent btIntent = new Intent(BluetoothSingleton.get(this).mBluetoothAdapter.ACTION_REQUEST_ENABLE);
-        startActivityForResult(btIntent, 1);
-    }
+//    private void turnOnBluetooth(){
+//        Intent btIntent = new Intent(BluetoothSingleton.get(this).mBluetoothAdapter.ACTION_REQUEST_ENABLE);
+//        startActivityForResult(btIntent, 1);
+//    }
 
 
     @Override
     public void onPause() {
-
-        BluetoothSingleton.get(this).stopDiscovery();
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        BluetoothSingleton.get(this).unregisterReceiver();
-        super.onDestroy();
     }
 
 
@@ -241,27 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                         Log.d("TAG", "SETTING TO TRUE");
                                                         Intent intentLogin;
                                                         if (user.isStudent()) {
-                                                            Log.d("TAG","This is a student");
-
-                                                            intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
-                                                        } else {
-                                                            intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
-
-                                                        }
-
-                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
-                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
-                                                        Log.d("TAG", "HEY "+ Boolean.toString(user.isStudent()));
-
-                                                        startActivityForResult(intentLogin, 2);}
-                                                    else if (dataSnapshot.getValue().toString()
-                                                            .equals("false")) {
-                                                        user.setStudent(false);
-                                                        Log.d("TAG", "SETTING TO FALSE");
-
-                                                        Intent intentLogin;
-                                                        if (user.isStudent()) {
-                                                            Log.d("TAG","This is a student");
+                                                            Log.d("TAG", "This is a student");
 
                                                             intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
                                                         } else {
@@ -273,7 +248,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                         intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
                                                         Log.d("TAG", "HEY " + Boolean.toString(user.isStudent()));
 
-                                                        startActivityForResult(intentLogin, 2); }
+                                                        startActivityForResult(intentLogin, 2);
+                                                    } else if (dataSnapshot.getValue().toString()
+                                                            .equals("false")) {
+                                                        user.setStudent(false);
+                                                        Log.d("TAG", "SETTING TO FALSE");
+
+                                                        Intent intentLogin;
+                                                        if (user.isStudent()) {
+                                                            Log.d("TAG", "This is a student");
+
+                                                            intentLogin = new Intent(getApplicationContext(), StudentClassManagementActivity.class);
+                                                        } else {
+                                                            intentLogin = new Intent(getApplicationContext(), ProfessorManageCoursesActivitty.class);
+
+                                                        }
+
+                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_EMAIL_ADDRESS, textEmailAddress.getText());
+                                                        intentLogin.putExtra(StudentClassManagementActivity.EXTRA_PASSWORD, textPassword.getText());
+                                                        Log.d("TAG", "HEY " + Boolean.toString(user.isStudent()));
+
+                                                        startActivityForResult(intentLogin, 2);
+                                                    }
                                                 }
 
 
@@ -325,12 +321,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonClear:
-                editTextfirstName.setText(null);
-                editTextLastName.setText(null);
-                editTextNewEmail.setText(null);
-                editTextUniversityId.setText(null);
-                editTextNewPassword.setText(null);
-                editTextNewConfirmPass.setText(null);
+                clearRegisterText();
                 break;
 
             case R.id.buttonCreateAccount:
@@ -418,11 +409,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                 viewRegister.setVisibility(View.GONE);
                 viewLogin.setVisibility(View.VISIBLE);
+//                clearRegisterText();
                 break;
 
             case id.buttonBack:
                 viewLogin.setVisibility(View.VISIBLE);
                 viewRegister.setVisibility(View.GONE);
+                clearRegisterText();
                 break;
         }
     }
@@ -467,5 +460,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+
+    public void clearRegisterText(){
+        editTextfirstName.setText(null);
+        editTextLastName.setText(null);
+        editTextNewEmail.setText(null);
+        editTextUniversityId.setText(null);
+        editTextNewPassword.setText(null);
+        editTextNewConfirmPass.setText(null);
+        userSelectionRadioGroup.clearCheck();
     }
 }

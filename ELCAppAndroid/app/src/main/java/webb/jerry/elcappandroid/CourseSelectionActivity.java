@@ -108,16 +108,5 @@ public class CourseSelectionActivity extends AppCompatActivity {
         });
 
     }
-    @Override
-    public void onPause() {
 
-        BluetoothSingleton.get(this).stopDiscovery();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        BluetoothSingleton.get(this).unregisterReceiver();
-        super.onDestroy();
-    }
 }

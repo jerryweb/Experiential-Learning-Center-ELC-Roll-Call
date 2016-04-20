@@ -57,7 +57,8 @@
             android:text="Attendance"
             android:background="@color/teal"
             android:textColor="@color/white"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:visibility="invisible" />
 
     </LinearLayout>
 

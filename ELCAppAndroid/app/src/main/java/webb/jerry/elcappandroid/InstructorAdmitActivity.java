@@ -126,11 +126,5 @@ public class InstructorAdmitActivity extends AppCompatActivity implements View.O
         }
     }
 
-    @Override
-    public void onPause() {
-
-        BluetoothSingleton.get(this).stopDiscovery();
-        super.onPause();
-    }
 
 }

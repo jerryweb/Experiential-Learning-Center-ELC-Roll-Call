@@ -190,7 +190,9 @@
                 android:textColor="@color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="@dimen/text_medium_size"
-                android:layout_weight=".148" />
+                android:layout_weight=".148"
+                android:lines="1"
+                android:maxLength="10" />
 
             <EditText
                 android:layout_width="fill_parent"

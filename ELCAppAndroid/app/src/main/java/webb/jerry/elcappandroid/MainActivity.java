@@ -188,10 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 Log.d(TAG, "Register login Clicked");
-//                if(textEmailAddress.getText()uals(" ")) {
-//                    Toast.makeText(getApplicationContext(),"Please enter a valid email address", Toast.LENGTH_SHORT).show();
-//                }
-//                else{
+
                 final User user = new User();
                 Firebase ref = new Firebase(getResources().getString(R.string.Firebase_url));
                 ref.authWithPassword(textEmailAddress.getText().toString(),
@@ -314,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "Register button Clicked");
                 viewLogin.setVisibility(View.GONE);
                 viewRegister.setVisibility(View.VISIBLE);
+                clearRegisterText();
                 break;
 
             case R.id.forgotPasswordButton:

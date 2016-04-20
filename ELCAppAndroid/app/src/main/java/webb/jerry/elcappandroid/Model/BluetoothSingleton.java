@@ -107,7 +107,7 @@ public class BluetoothSingleton {
             }
             else if (mBluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 //discovery finishes, dismiss progress dialog
-                Toast.makeText(mAppContext,"reseting search",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mAppContext,"reseting search",Toast.LENGTH_SHORT).show();
                 Log.d("TAG", String.valueOf(scanning));
 
                 startScan();
@@ -116,7 +116,7 @@ public class BluetoothSingleton {
                 //bluetooth device found
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String name = device.getName();
-                Toast.makeText(mAppContext,name,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mAppContext,name,Toast.LENGTH_SHORT).show();
                 boolean foundBeacon = BeaconSingleton.get(mAppContext).searchBeacon(device.getName(),device.getAddress());
 
 

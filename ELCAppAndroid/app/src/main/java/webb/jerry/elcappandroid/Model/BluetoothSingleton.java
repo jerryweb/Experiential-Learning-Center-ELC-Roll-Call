@@ -31,7 +31,7 @@ public class BluetoothSingleton {
     public static final String PREF_EMAIL = "elc.rollcall.preferences.email";
     private static final String PREF_FILENAME = "webb.jerry.elcappandroid.preferences.app_prefs";
     public static BluetoothSingleton sBluetoothSingleton;
-    //    private static final int DISCOVERY_REQUEST = 1;
+//    private static final int DISCOVERY_REQUEST = 1;
     private Context mAppContext;
     public BluetoothAdapter mBluetoothAdapter;
     IntentFilter filter;
@@ -39,7 +39,8 @@ public class BluetoothSingleton {
 
     private BluetoothSingleton(Context c){
         this.mAppContext = c;
-        initBluetooth();
+        scanning = false;
+//        initBluetooth();
     }
 
     public static BluetoothSingleton get(Context c) {
@@ -51,7 +52,6 @@ public class BluetoothSingleton {
 
     public boolean initBluetooth(){
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        scanning = false;
 
         if(mBluetoothAdapter == null){
             Toast.makeText(mAppContext, "Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
@@ -82,6 +82,7 @@ public class BluetoothSingleton {
             scanning = false;
         }
         else if (!scanning){
+            Toast.makeText(mAppContext,"started",Toast.LENGTH_SHORT).show();
             mBluetoothAdapter.startDiscovery();
             scanning= true;
         }
@@ -105,7 +106,7 @@ public class BluetoothSingleton {
                 Toast.makeText(mAppContext,"started",Toast.LENGTH_SHORT).show();
 
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                //discovery finishes, dismis progress dialog
+                //discovery finishes, dismiss progress dialog
                 Toast.makeText(mAppContext,"reseting search",Toast.LENGTH_SHORT).show();
                 mBluetoothAdapter.startDiscovery();
 
@@ -113,10 +114,10 @@ public class BluetoothSingleton {
                 //bluetooth device found
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String name = device.getName();
-//                Toast.makeText(getApplicationContext(),name,Toast.LENGTH_SHORT).show();
+                Toast.makeText(mAppContext,name,Toast.LENGTH_SHORT).show();
                 boolean foundBeacon = BeaconSingleton.get(mAppContext).searchBeacon(device.getName(),device.getAddress());
                 if(foundBeacon){
-                    Toast.makeText(mAppContext,"we can now log in!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mAppContext,"Found the beacon!",Toast.LENGTH_SHORT).show();
                     //Tell firebase to mark student as here
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
@@ -179,6 +180,7 @@ public class BluetoothSingleton {
 
                             }
                         });
+
                 }
 
             }

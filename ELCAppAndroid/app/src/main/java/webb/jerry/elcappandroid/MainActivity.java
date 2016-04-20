@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button forgotPasswordButton;
     Button loginButton;
     Button registerButton;
-    private BluetoothAdapter mBluetoothAdapter;
+//    private BluetoothAdapter mBluetoothAdapter;
     Set<BluetoothDevice> deviceSet;
     ArrayList<String> deviceNames;
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonClear;
     Button buttonBack;
     Integer userType;
-    IntentFilter filter;
+//    IntentFilter filter;
 
     // Create the bluetooth receiver at the beginning of the activity
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
         Firebase.setAndroidContext(this);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         init();
 
@@ -85,18 +85,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             turnOnBluetooth();
         }
 
-        BluetoothSingleton.get(this).toggleBeaconSearch();
-        if(mBluetoothAdapter == null){
+        if(BluetoothSingleton.get(this).mBluetoothAdapter == null){
             Toast.makeText(getApplicationContext(),"Bluetooth is not enabled on your device", Toast.LENGTH_SHORT).show();
             finish();
         }
         else{
-            if(!mBluetoothAdapter.isEnabled()){
+            if(!BluetoothSingleton.get(this).mBluetoothAdapter.isEnabled()){
                 turnOnBluetooth();
             }
-            else{
-                mBluetoothAdapter.startDiscovery();
-            }
+//            else{
+//              BluetoothSingleton.get(this).toggleBeaconSearch();
+//            }
         }
 
 
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onPause() {
 
-        BluetoothSingleton.get(this).sBluetoothSingleton.stopDiscovery();
+        BluetoothSingleton.get(this).stopDiscovery();
         super.onPause();
     }
 
@@ -234,9 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                         });
-                    mBluetoothAdapter.cancelDiscovery();
-                    mBluetoothAdapter.startDiscovery();
-//                    }
+
                 break;
 
             case R.id.registerButton:
@@ -386,5 +383,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
     }
 }

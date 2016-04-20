@@ -1,5 +1,6 @@
 package webb.jerry.elcappandroid;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class StudentClassManagementActivity extends AppCompatActivity {
     CourseAdapter courseAdapter;
     Button scanForBeaconButton;
     Button courseButton;
+    Button buttonStudentLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class StudentClassManagementActivity extends AppCompatActivity {
         listViewStudntClassAttendance = (ListView) findViewById(R.id.listViewStudntClassAttendance);
         scanForBeaconButton = (Button) findViewById(R.id.scanForBeaconButton);
         courseButton = (Button) findViewById(R.id.buttonRegister);
+        buttonStudentLogout = (Button) findViewById(R.id.buttonStudentLogout);
+
         loadStudentCourses();
         courseAdapter = new CourseAdapter(
                 getApplicationContext(),
@@ -81,6 +85,14 @@ public class StudentClassManagementActivity extends AppCompatActivity {
                     }
                 });
 
+                buttonStudentLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    }
+                });
 
             }
     private void loadStudentCourses() {

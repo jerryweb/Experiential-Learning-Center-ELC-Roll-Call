@@ -30,8 +30,8 @@ public class ProfessorManageCoursesActivitty extends AppCompatActivity  {
 
         buttonCreateCourse = (Button) findViewById(R.id.buttonCreateCourse);
         listViewCourses = (ListView) findViewById(R.id.listViewCourses);
-        //courseAdapter = new CourseAdapter(this, courses);
-        //listViewCourses.setAdapter(courseAdapter);
+        courseAdapter = new CourseAdapter(this, courses);
+        listViewCourses.setAdapter(courseAdapter);
 
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
             @Override

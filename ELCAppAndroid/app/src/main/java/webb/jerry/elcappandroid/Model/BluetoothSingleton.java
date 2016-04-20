@@ -126,28 +126,33 @@ public class BluetoothSingleton {
                     SharedPreferences prefs = mAppContext.getSharedPreferences(
                             PREF_FILENAME, mAppContext.MODE_PRIVATE);
                     final String encodedEmail = prefs.getString(PREF_EMAIL, "current_user");
-                   final BeaconSingleton b = new BeaconSingleton(mAppContext.getApplicationContext());
-
-                        Firebase userLocation = new Firebase(mAppContext.getResources().
+                    final BeaconSingleton b = new BeaconSingleton(mAppContext.getApplicationContext());
+                    Log.d("TAG", "I'm HERE");
+                        final Firebase userLocation = new Firebase(mAppContext.getResources().
                                 getString(R.string.Firebase_url));
                         userLocation.child("Users").child(encodedEmail)
-                                .addChildEventListener(new ChildEventListener() {
+                                .child("courses").addChildEventListener(new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                                 final Map<String, Object> newCourse = (Map<String, Object>) dataSnapshot.getValue();
                                 Log.d("TAG", "I'm HERE");
                                 Log.d("TAG", Integer.toString(newCourse.size()));
+                                Log.d("TAG", newCourse.get("beaconName").toString());
+                                Log.d("TAG", b.getBeaconName());
                                 if (newCourse.get("beaconName").toString().equals(b.getBeaconName())) {
+                                    Log.d("TAG", "I did it!");
+                                    //String newEmail = encodedEmail.replace(",", ".");
                                   final Firebase userLocation1 = new Firebase(mAppContext.getResources().getString(R.string.Firebase_url))
                                             .child("Courses").child(newCourse.get("className")
-                                            + "-" + newCourse.get("dates")).child(formattedDate);
+                                            + "-" + newCourse.get("dates")).child(formattedDate)
+                                          .child(encodedEmail);
                                     userLocation1.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.getValue() == null) {
-                                                userLocation1.setValue(newCourse.get("firstName")
-                                                + " " + newCourse.get("lastName"));
+                                                Log.d("TAG", "I did it!");
+                                                userLocation1.setValue("here");
                                             }
                                         }
 
